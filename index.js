@@ -107,7 +107,7 @@ function getRealitiveDir( dir ) {
 
 module.exports = Object.freeze({
 
-    setDirectory( dir ) {
+    setDirectoryAndGetLogger( dir ) {
 
         let relativeDir = getRealitiveDir( dir );
 
