@@ -7,8 +7,6 @@ const sinon = require( 'sinon' );
 
 const freshy = require( 'freshy' )
 
-const originalPWD = process.env.PWD;
-
 
 describe( 'index.js', function() {
 
@@ -63,7 +61,6 @@ describe( 'index.js', function() {
 
                 delete process.env.LOG_LEVELS;
                 delete process.env.ROOT_LOGGER_PATH;
-                process.env.PWD = originalPWD;
             });
 
             it( 'logging: env log levels and root path, message is logged', function() {
