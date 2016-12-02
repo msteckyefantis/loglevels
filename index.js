@@ -45,6 +45,53 @@ function log( level, colourCode, dir, message ) {
 }
 
 
+function getLogger( dir ) {
+
+    return Object.freeze({
+
+        debug( message ) {
+
+            if( logLevels.indexOf( DEBUG ) >= 0 ) {
+
+                log( DEBUG, 34, dir, message );
+            }
+        },
+
+        info( message ) {
+
+            if( logLevels.indexOf( INFO ) >= 0 ) {
+
+                log( INFO, 92, dir, message );
+            }
+        },
+
+        warn( message ) {
+
+            if( logLevels.indexOf( WARN ) >= 0 ) {
+
+                log( WARN, 93, dir, message );
+            }
+        },
+
+        error( message ) {
+
+            if( logLevels.indexOf( ERROR ) >= 0 ) {
+
+                log( ERROR, 91, dir, message );
+            }
+        },
+
+        critical( message ) {
+
+            if( logLevels.indexOf( CRITICAL ) >= 0 ) {
+
+                log( CRITICAL, 31, dir, message );
+            }
+        }
+    });
+}
+
+
 function getRealitiveDir( dir ) {
 
     if( relativeDirIndentifier ) {
@@ -62,47 +109,6 @@ module.exports = Object.freeze({
 
         let relativeDir = getRealitiveDir( dir );
 
-        return Object.freeze({
-
-            debug( message ) {
-
-                if( logLevels.indexOf( DEBUG ) >= 0 ) {
-
-                    log( DEBUG, 34, relativeDir, message );
-                }
-            },
-
-            info( message ) {
-
-                if( logLevels.indexOf( INFO ) >= 0 ) {
-
-                    log( INFO, 92, relativeDir, message );
-                }
-            },
-
-            warn( message ) {
-
-                if( logLevels.indexOf( WARN ) >= 0 ) {
-
-                    log( WARN, 93, relativeDir, message );
-                }
-            },
-
-            error( message ) {
-
-                if( logLevels.indexOf( ERROR ) >= 0 ) {
-
-                    log( ERROR, 91, relativeDir, message );
-                }
-            },
-
-            critical( message ) {
-
-                if( logLevels.indexOf( CRITICAL ) >= 0 ) {
-
-                    log( CRITICAL, 31, relativeDir, message );
-                }
-            }
-        });
+        return getLogger( relativeDir );
     }
 });
