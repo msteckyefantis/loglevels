@@ -47,7 +47,7 @@ function log( level, colourCode, dir, message ) {
 
 function getLogger( dir ) {
 
-    return Object.freeze({
+    const logger = Object.freeze({
 
         debug( message ) {
 
@@ -89,6 +89,8 @@ function getLogger( dir ) {
             }
         }
     });
+
+    return logger;
 }
 
 
