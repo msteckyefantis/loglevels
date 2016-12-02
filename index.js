@@ -33,7 +33,7 @@ else {
 const relativeDirIndentifier = envRootLoggerPath;
 
 
-function logger( level, colourCode, dir, message ) {
+function log( level, colourCode, dir, message ) {
 
     let levelColor = `\x1b[${ colourCode }m`;
     let defaultColor = '\x1b[0m';
@@ -68,7 +68,7 @@ module.exports = Object.freeze({
 
                 if( logLevels.indexOf( DEBUG ) >= 0 ) {
 
-                    logger( DEBUG, 34, relativeDir, message );
+                    log( DEBUG, 34, relativeDir, message );
                 }
             },
 
@@ -76,7 +76,7 @@ module.exports = Object.freeze({
 
                 if( logLevels.indexOf( INFO ) >= 0 ) {
 
-                    logger( INFO, 92, relativeDir, message );
+                    log( INFO, 92, relativeDir, message );
                 }
             },
 
@@ -84,7 +84,7 @@ module.exports = Object.freeze({
 
                 if( logLevels.indexOf( WARN ) >= 0 ) {
 
-                    logger( WARN, 93, relativeDir, message );
+                    log( WARN, 93, relativeDir, message );
                 }
             },
 
@@ -92,7 +92,7 @@ module.exports = Object.freeze({
 
                 if( logLevels.indexOf( ERROR ) >= 0 ) {
 
-                    logger( ERROR, 91, relativeDir, message );
+                    log( ERROR, 91, relativeDir, message );
                 }
             },
 
@@ -100,7 +100,7 @@ module.exports = Object.freeze({
 
                 if( logLevels.indexOf( CRITICAL ) >= 0 ) {
 
-                    logger( CRITICAL, 31, relativeDir, message );
+                    log( CRITICAL, 31, relativeDir, message );
                 }
             }
         });
