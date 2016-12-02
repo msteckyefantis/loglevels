@@ -1,5 +1,5 @@
 {
-  "name": "mega_monkey_logger",
+  "name": "loglevels",
   "version": "1.0.0",
   "description": "single file no dependency colour logger",
   "main": "index.js",
