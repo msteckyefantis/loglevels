@@ -1,6 +1,6 @@
 {
   "name": "loglevels",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "single file no dependency colour logger",
   "main": "index.js",
   "scripts": {
@@ -20,19 +20,18 @@
     "sinon": "^1.17.6"
   },
   "keywords": [
-      "loglevel",
-      "log",
-      "level",
-      "small",
-      "simple",
-      "basic",
-      "terminal",
-      "colour",
-      "color"
+    "loglevel",
+    "log",
+    "level",
+    "small",
+    "simple",
+    "basic",
+    "terminal",
+    "colour",
+    "color"
   ],
   "repository": {
-
-    "type" : "git",
-    "url" : "https://github.com/msteckyefantis/loglevels"
+    "type": "git",
+    "url": "https://github.com/msteckyefantis/loglevels"
   }
 }
