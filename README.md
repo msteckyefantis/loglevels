@@ -18,7 +18,7 @@ npm install loglevels
 // process.env.ROOT_LOGGER_PATH = "test";
 // process.env.LOG_LEVELS = "debug warn critical";
 
-const logger = require( 'loglevels' ).setDirectoryAndGetLogger( __filename );
+const logger = require( 'loglevels' ).setPathAndGetLogger( __filename );
 
 logger.debug( 'your message here' )
 logger.info( 'your message here' )

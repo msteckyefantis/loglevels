@@ -69,7 +69,7 @@ describe( 'index.js', function() {
 
                 process.env.ROOT_LOGGER_PATH = controlRootPath;
 
-                logger = require( '../index.js' ).setDirectoryAndGetLogger( controlFileName );
+                logger = require( '../index.js' ).setPathAndGetLogger( controlFileName );
 
                 logger[ levelData.level ]( controlMessage );
 
@@ -83,7 +83,7 @@ describe( 'index.js', function() {
 
             it( 'logging: default log levels and no root path, message is logged', function() {
 
-                logger = require( '../index.js' ).setDirectoryAndGetLogger( '/a/b/c.js' );
+                logger = require( '../index.js' ).setPathAndGetLogger( '/a/b/c.js' );
 
                 logger[ levelData.level ]( controlMessage );
 
@@ -100,7 +100,7 @@ describe( 'index.js', function() {
 
                 process.env.LOG_LEVELS = "fake_level";
 
-                logger = require( '../index.js' ).setDirectoryAndGetLogger( controlFileName );
+                logger = require( '../index.js' ).setPathAndGetLogger( controlFileName );
 
                 logger[ levelData.level ]( controlMessage );
 

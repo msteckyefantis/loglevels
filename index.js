@@ -30,7 +30,7 @@ else {
     envRootLoggerPath = null;
 }
 
-const relativeDirIndentifier = envRootLoggerPath;
+const relativePathIndentifier = envRootLoggerPath;
 
 
 function log( level, colourCode, dir, message ) {
@@ -94,23 +94,23 @@ function getLogger( dir ) {
 }
 
 
-function getRealitiveDir( dir ) {
+function getRealitivePath( path ) {
 
-    if( relativeDirIndentifier ) {
+    if( relativePathIndentifier ) {
 
-        return dir.substring( dir.lastIndexOf( relativeDirIndentifier ) + relativeDirIndentifier.length );
+        return path.substring( path.lastIndexOf( relativePathIndentifier ) + relativePathIndentifier.length );
     }
 
-    return dir;
+    return path;
 }
 
 
 module.exports = Object.freeze({
 
-    setDirectoryAndGetLogger( dir ) {
+    setPathAndGetLogger( path ) {
 
-        let relativeDir = getRealitiveDir( dir );
+        let relativePath = getRealitivePath( path );
 
-        return getLogger( relativeDir );
+        return getLogger( relativePath );
     }
 });
