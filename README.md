@@ -29,6 +29,7 @@ logger.critical( 'sexy monkey' )
 ```
 
 ####This code sample logs the following:
+(`__filename` in this example is `"Users/User/epic__app/test/loggerTest/index.js"`)
 [![full.png](https://s4.postimg.org/ouj6m9yz1/full.png)](https://postimg.org/image/sqwii9jyh/)
 
 
