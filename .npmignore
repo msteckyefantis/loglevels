@@ -3,4 +3,4 @@
 coverage
 test
 .gitignore
-.jshintrc
+.travis.yml
