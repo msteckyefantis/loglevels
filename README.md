@@ -1,4 +1,4 @@
-#LogLevels
+#LogLevels [![npm version](https://badge.fury.io/js/loglevels.svg)](https://badge.fury.io/js/loglevels)
 
 ##About:
 Sensual, single file, no dependency, colour logger. Just for you baby🐬.
