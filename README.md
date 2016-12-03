@@ -20,11 +20,11 @@ npm install loglevels
 
 const logger = require( 'loglevels' ).setPathAndGetLogger( __filename );
 
-logger.debug( 'your message here' )
-logger.info( 'your message here' )
-logger.warn( 'your message here' )
-logger.error( 'your message here' )
-logger.critical( 'sexy monkey' )
+logger.debug( 'your message here' );
+logger.info( 'your message here' );
+logger.warn( 'your message here' );
+logger.error( 'your message here' );
+logger.critical( 'sexy monkey' );
 
 ```
 
