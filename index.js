@@ -35,11 +35,11 @@ const relativePathIndentifier = envRootLoggerPath;
 
 function log( level, colourCode, path, message ) {
 
-    let levelColor = `\x1b[${ colourCode }m`;
-    let defaultColor = '\x1b[0m';
-    let dirColor = '\x1b[90m';
+    const levelColor = `\x1b[${ colourCode }m`;
+    const defaultColor = '\x1b[0m';
+    const dirColor = '\x1b[90m';
 
-    let loggerMessage = `${ level }: ${ dirColor }${ path }:${ levelColor } ${ message }`;
+    const loggerMessage = `${ level }: ${ dirColor }${ path }:${ levelColor } ${ message }`;
 
     console.log( `${ levelColor }${ loggerMessage }${ defaultColor }` );
 }
