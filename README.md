@@ -15,8 +15,8 @@ npm install loglevels
 'use strict';
 
 /* root and log level environment variables: */
-// process.env.ROOT_LOGGER_PATH = "test";
-// process.env.LOG_LEVELS = "debug warn critical";
+// process.env.ROOT_LOGGER_PATH = 'test';
+// process.env.LOG_LEVELS = 'debug warn critical';
 
 const logger = require( 'loglevels' ).setPathAndGetLogger( __filename );
 
@@ -29,7 +29,7 @@ logger.critical( 'sexy monkey' );
 ```
 
 ####This code sample logs the following:
-(`__filename` in this example is `"/Users/User/epic__app/test/loggerTest/index.js"`)
+(`__filename` in this example is `'/Users/User/epic__app/test/loggerTest/index.js'`)
 [![full.png](https://s4.postimg.org/ouj6m9yz1/full.png)](https://postimg.org/image/sqwii9jyh/)
 
 
