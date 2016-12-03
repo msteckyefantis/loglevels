@@ -9,7 +9,7 @@ const levelToColourCode = Object.freeze({
     critical: 31
 });
 
-const allLevels = Object.freeze( Object.keys( levelToColourCode ) );
+const allLogLevels = Object.freeze( Object.keys( levelToColourCode ) );
 
 // getting the optional LOG_LEVELS environment variable if it's defined:
 let envLogLevels;
@@ -23,7 +23,7 @@ else {
     envLogLevels = null;
 }
 
-const logLevels = envLogLevels || allLevels;
+const logLevels = envLogLevels || allLogLevels;
 
 // getting the optional ROOT_LOGGER_PATH environment variable if it's defined:
 let envRootLoggerPath;
@@ -69,11 +69,11 @@ function getLogger( path ) {
 
     const logger = {};
 
-    allLevels.forEach( function( level ) {
+    allLogLevels.forEach( function( logLevel ) {
 
-        logger[ level ] = function( message ) {
+        logger[ logLevel ] = function( message ) {
 
-            logIfLevelEnabled( level, path, message );
+            logIfLevelEnabled( logLevel, path, message );
         }
     });
 
