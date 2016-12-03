@@ -6,16 +6,14 @@ const WARN = 'warn';
 const ERROR = 'error';
 const CRITICAL = 'critical';
 
-const levelToColourCode = {};
+const levelToColourCode = Object.freeze({
 
-levelToColourCode[ DEBUG ] = 34;
-levelToColourCode[ INFO ] = 92;
-levelToColourCode[ WARN ] = 93;
-levelToColourCode[ ERROR ] = 91;
-levelToColourCode[ CRITICAL ] = 31;
-
-Object.freeze( levelToColourCode );
-
+    debug: 34,
+    info: 92,
+    warn: 93,
+    error: 91,
+    critical: 31
+});
 
 // setting the optional LOG_LEVELS environment variable:
 let envLogLevels;
