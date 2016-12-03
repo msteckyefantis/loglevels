@@ -33,19 +33,19 @@ else {
 const relativePathIndentifier = envRootLoggerPath;
 
 
-function log( level, colourCode, dir, message ) {
+function log( level, colourCode, path, message ) {
 
     let levelColor = `\x1b[${ colourCode }m`;
     let defaultColor = '\x1b[0m';
     let dirColor = '\x1b[90m';
 
-    let loggerMessage = `${ level }: ${ dirColor }${ dir }:${ levelColor } ${ message }`;
+    let loggerMessage = `${ level }: ${ dirColor }${ path }:${ levelColor } ${ message }`;
 
     console.log( `${ levelColor }${ loggerMessage }${ defaultColor }` );
 }
 
 
-function getLogger( dir ) {
+function getLogger( path ) {
 
     const logger = Object.freeze({
 
@@ -53,7 +53,7 @@ function getLogger( dir ) {
 
             if( logLevels.indexOf( DEBUG ) >= 0 ) {
 
-                log( DEBUG, 34, dir, message );
+                log( DEBUG, 34, path, message );
             }
         },
 
@@ -61,7 +61,7 @@ function getLogger( dir ) {
 
             if( logLevels.indexOf( INFO ) >= 0 ) {
 
-                log( INFO, 92, dir, message );
+                log( INFO, 92, path, message );
             }
         },
 
@@ -69,7 +69,7 @@ function getLogger( dir ) {
 
             if( logLevels.indexOf( WARN ) >= 0 ) {
 
-                log( WARN, 93, dir, message );
+                log( WARN, 93, path, message );
             }
         },
 
@@ -77,7 +77,7 @@ function getLogger( dir ) {
 
             if( logLevels.indexOf( ERROR ) >= 0 ) {
 
-                log( ERROR, 91, dir, message );
+                log( ERROR, 91, path, message );
             }
         },
 
@@ -85,7 +85,7 @@ function getLogger( dir ) {
 
             if( logLevels.indexOf( CRITICAL ) >= 0 ) {
 
-                log( CRITICAL, 31, dir, message );
+                log( CRITICAL, 31, path, message );
             }
         }
     });
