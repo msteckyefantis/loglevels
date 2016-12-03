@@ -60,7 +60,9 @@ function log( level, path, message ) {
 
 function logIfLevelEnabled( level, path, message ) {
 
-    if( logLevels.indexOf( level ) >= 0 ) {
+    const levelIsEnabled = (logLevels.indexOf( level ) >= 0);
+
+    if( levelIsEnabled ) {
 
         log( level, path, message );
     }
