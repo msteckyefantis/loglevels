@@ -10,14 +10,14 @@ let envLogLevels;
 
 if( process.env.LOG_LEVELS ) {
 
-    envLogLevels = process.env.LOG_LEVELS.split( ' ' );
+    envLogLevels = Object.freeze( process.env.LOG_LEVELS.split( ' ' ) );
 }
 else {
 
     envLogLevels = null;
 }
 
-const logLevels = envLogLevels || [ DEBUG, INFO, WARN, ERROR, CRITICAL ];
+const logLevels = envLogLevels || Object.freeze( [ DEBUG, INFO, WARN, ERROR, CRITICAL ] );
 
 let envRootLoggerPath;
 
@@ -98,7 +98,13 @@ function getRealitivePath( path ) {
 
     if( relativePathIndentifier ) {
 
-        return path.substring( path.lastIndexOf( relativePathIndentifier ) + relativePathIndentifier.length );
+        const relativePath = path.substring(
+
+            path.lastIndexOf( relativePathIndentifier ) +
+            relativePathIndentifier.length
+        );
+
+        return relativePath;
     }
 
     return path;
