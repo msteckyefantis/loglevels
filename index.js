@@ -45,8 +45,8 @@ function log( level, path, message ) {
     const colourCode = levelToColourCode[ level ];
 
     const levelColour = `\x1b[${ colourCode }m`;
-    const defaultColour = '\x1b[0m';
     const pathColour = '\x1b[90m';
+    const defaultColour = '\x1b[0m';
 
     const loggerMessage = `${ level }: ${ pathColour }${ path }:${ levelColour } ${ message }`;
 
