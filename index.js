@@ -6,6 +6,7 @@ const WARN = 'warn';
 const ERROR = 'error';
 const CRITICAL = 'critical';
 
+// setting the optional LOG_LEVELS environment variable:
 let envLogLevels;
 
 if( process.env.LOG_LEVELS ) {
@@ -19,6 +20,7 @@ else {
 
 const logLevels = envLogLevels || Object.freeze( [ DEBUG, INFO, WARN, ERROR, CRITICAL ] );
 
+// setting the optional ROOT_LOGGER_PATH environment variable:
 let envRootLoggerPath;
 
 if( process.env.ROOT_LOGGER_PATH ) {
