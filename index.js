@@ -1,5 +1,9 @@
 'use strict';
 
+const pathColour = '\x1b[90m';
+
+const defaultColour = '\x1b[0m';
+
 const levelToColourCode = Object.freeze({
 
     debug: 34,
@@ -45,8 +49,6 @@ function log( level, path, message ) {
     const colourCode = levelToColourCode[ level ];
 
     const levelColour = `\x1b[${ colourCode }m`;
-    const pathColour = '\x1b[90m';
-    const defaultColour = '\x1b[0m';
 
     const loggerMessage = `${ level }: ${ pathColour }${ path }:${ levelColour } ${ message }`;
 
