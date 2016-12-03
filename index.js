@@ -6,6 +6,17 @@ const WARN = 'warn';
 const ERROR = 'error';
 const CRITICAL = 'critical';
 
+const levelToColourCode = {};
+
+levelToColourCode[ DEBUG ] = 34;
+levelToColourCode[ INFO ] = 92;
+levelToColourCode[ WARN ] = 93;
+levelToColourCode[ ERROR ] = 91;
+levelToColourCode[ CRITICAL ] = 31;
+
+Object.freeze( levelToColourCode );
+
+
 // setting the optional LOG_LEVELS environment variable:
 let envLogLevels;
 
@@ -35,7 +46,9 @@ else {
 const relativePathIndentifier = envRootLoggerPath;
 
 
-function log( level, colourCode, path, message ) {
+function log( level, path, message ) {
+
+    const colourCode = levelToColourCode[ level ];
 
     const levelColour = `\x1b[${ colourCode }m`;
     const defaultColour = '\x1b[0m';
@@ -47,11 +60,11 @@ function log( level, colourCode, path, message ) {
 }
 
 
-function logIfLevelEnabled( level, colourCode, path, message ) {
+function logIfLevelEnabled( level, path, message ) {
 
     if( logLevels.indexOf( level ) >= 0 ) {
 
-        log( level, colourCode, path, message );
+        log( level, path, message );
     }
 }
 
@@ -62,27 +75,27 @@ function getLogger( path ) {
 
         debug( message ) {
 
-            logIfLevelEnabled( DEBUG, 34, path, message );
+            logIfLevelEnabled( DEBUG, path, message );
         },
 
         info( message ) {
 
-            logIfLevelEnabled( INFO, 92, path, message );
+            logIfLevelEnabled( INFO, path, message );
         },
 
         warn( message ) {
 
-            logIfLevelEnabled( WARN, 93, path, message );
+            logIfLevelEnabled( WARN, path, message );
         },
 
         error( message ) {
 
-            logIfLevelEnabled( ERROR, 91, path, message );
+            logIfLevelEnabled( ERROR, path, message );
         },
 
         critical( message ) {
 
-            logIfLevelEnabled( CRITICAL, 31, path, message );
+            logIfLevelEnabled( CRITICAL, path, message );
         }
     });
 
