@@ -1,11 +1,5 @@
 'use strict';
 
-const DEBUG = 'debug';
-const INFO = 'info';
-const WARN = 'warn';
-const ERROR = 'error';
-const CRITICAL = 'critical';
-
 const levelToColourCode = Object.freeze({
 
     debug: 34,
@@ -14,6 +8,8 @@ const levelToColourCode = Object.freeze({
     error: 91,
     critical: 31
 });
+
+const levels = Object.freeze( Object.keys( levelToColourCode ) );
 
 // getting the optional LOG_LEVELS environment variable if it's defined:
 let envLogLevels;
@@ -27,7 +23,7 @@ else {
     envLogLevels = null;
 }
 
-const logLevels = envLogLevels || Object.freeze( [ DEBUG, INFO, WARN, ERROR, CRITICAL ] );
+const logLevels = envLogLevels || levels;
 
 // getting the optional ROOT_LOGGER_PATH environment variable if it's defined:
 let envRootLoggerPath;
@@ -71,35 +67,17 @@ function logIfLevelEnabled( level, path, message ) {
 
 function getLogger( path ) {
 
-    const logger = Object.freeze({
+    const logger = {};
 
-        debug( message ) {
+    levels.forEach( function( level ) {
 
-            logIfLevelEnabled( DEBUG, path, message );
-        },
+        logger[ level ] = function( message ) {
 
-        info( message ) {
-
-            logIfLevelEnabled( INFO, path, message );
-        },
-
-        warn( message ) {
-
-            logIfLevelEnabled( WARN, path, message );
-        },
-
-        error( message ) {
-
-            logIfLevelEnabled( ERROR, path, message );
-        },
-
-        critical( message ) {
-
-            logIfLevelEnabled( CRITICAL, path, message );
+            logIfLevelEnabled( level, path, message );
         }
     });
 
-    return logger;
+    return Object.freeze( logger );
 }
 
 
