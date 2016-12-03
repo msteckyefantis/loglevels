@@ -23,27 +23,27 @@ describe( 'index.js', function() {
     [
         {
             level: 'debug',
-            colorCode: 34
+            colourCode: 34
         },
 
         {
             level: 'info',
-            colorCode: 92
+            colourCode: 92
         },
 
         {
             level: 'warn',
-            colorCode: 93
+            colourCode: 93
         },
 
         {
             level: 'error',
-            colorCode: 91
+            colourCode: 91
         },
 
         {
             level: 'critical',
-            colorCode: 31
+            colourCode: 31
         }
 
     ].forEach( function( levelData ) {
@@ -78,7 +78,7 @@ describe( 'index.js', function() {
                 expect( consoleLogStub.args.length ).equal( 1 );
                 expect( consoleLogStub.args[0].length ).equal( 1 );
                 expect( consoleLogStub.args[0][0] )
-                    .equal( `\u001b[${ levelData.colorCode }m${ levelData.level }: \u001b[90md/e/f.js:\u001b[${ levelData.colorCode }m mega monkey\u001b[0m` );
+                    .equal( `\u001b[${ levelData.colourCode }m${ levelData.level }: \u001b[90md/e/f.js:\u001b[${ levelData.colourCode }m mega monkey\u001b[0m` );
             });
 
             it( 'logging: default log levels and no root path, message is logged', function() {
@@ -92,7 +92,7 @@ describe( 'index.js', function() {
                 expect( consoleLogStub.args.length ).equal( 1 );
                 expect( consoleLogStub.args[0].length ).equal( 1 );
                 expect( consoleLogStub.args[0][0] )
-                    .equal( `\u001b[${ levelData.colorCode }m${ levelData.level }: \u001b[90m/a/b/c.js:\u001b[${ levelData.colorCode }m mega monkey\u001b[0m` );
+                    .equal( `\u001b[${ levelData.colourCode }m${ levelData.level }: \u001b[90m/a/b/c.js:\u001b[${ levelData.colourCode }m mega monkey\u001b[0m` );
 
             });
 
