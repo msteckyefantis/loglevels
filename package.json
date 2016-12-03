@@ -4,10 +4,9 @@
   "description": "single file no dependency colour logger",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test",
-    "test/": "mocha test",
-    "coverage": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- test --recursive",
-    "coverage/": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- test --recursive"
+    "test": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- test --recursive",
+    "test/": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- test --recursive",
+    "test_no_coverage": "mocha test/index.test.js"
   },
   "author": "Michael Stecky-Efantis",
   "license": "ISC",
