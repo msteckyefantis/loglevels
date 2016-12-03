@@ -115,7 +115,7 @@ module.exports = Object.freeze({
 
     setPathAndGetLogger( path ) {
 
-        let relativePath = getRealitivePath( path );
+        const relativePath = getRealitivePath( path );
 
         return getLogger( relativePath );
     }
