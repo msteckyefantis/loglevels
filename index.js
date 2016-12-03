@@ -15,7 +15,7 @@ const levelToColourCode = Object.freeze({
     critical: 31
 });
 
-// setting the optional LOG_LEVELS environment variable:
+// getting the optional LOG_LEVELS environment variable if it's defined:
 let envLogLevels;
 
 if( process.env.LOG_LEVELS ) {
@@ -29,7 +29,7 @@ else {
 
 const logLevels = envLogLevels || Object.freeze( [ DEBUG, INFO, WARN, ERROR, CRITICAL ] );
 
-// setting the optional ROOT_LOGGER_PATH environment variable:
+// getting the optional ROOT_LOGGER_PATH environment variable if it's defined:
 let envRootLoggerPath;
 
 if( process.env.ROOT_LOGGER_PATH ) {
