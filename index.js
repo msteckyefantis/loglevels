@@ -37,9 +37,9 @@ function log( level, colourCode, path, message ) {
 
     const levelColor = `\x1b[${ colourCode }m`;
     const defaultColor = '\x1b[0m';
-    const dirColor = '\x1b[90m';
+    const pathColor = '\x1b[90m';
 
-    const loggerMessage = `${ level }: ${ dirColor }${ path }:${ levelColor } ${ message }`;
+    const loggerMessage = `${ level }: ${ pathColor }${ path }:${ levelColor } ${ message }`;
 
     console.log( `${ levelColor }${ loggerMessage }${ defaultColor }` );
 }
