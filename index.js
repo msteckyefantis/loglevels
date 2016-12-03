@@ -47,48 +47,42 @@ function log( level, colourCode, path, message ) {
 }
 
 
+function logIfLevelEnabled( level, colourCode, path, message ) {
+
+    if( logLevels.indexOf( level ) >= 0 ) {
+
+        log( level, colourCode, path, message );
+    }
+}
+
+
 function getLogger( path ) {
 
     const logger = Object.freeze({
 
         debug( message ) {
 
-            if( logLevels.indexOf( DEBUG ) >= 0 ) {
-
-                log( DEBUG, 34, path, message );
-            }
+            logIfLevelEnabled( DEBUG, 34, path, message );
         },
 
         info( message ) {
 
-            if( logLevels.indexOf( INFO ) >= 0 ) {
-
-                log( INFO, 92, path, message );
-            }
+            logIfLevelEnabled( INFO, 92, path, message );
         },
 
         warn( message ) {
 
-            if( logLevels.indexOf( WARN ) >= 0 ) {
-
-                log( WARN, 93, path, message );
-            }
+            logIfLevelEnabled( WARN, 93, path, message );
         },
 
         error( message ) {
 
-            if( logLevels.indexOf( ERROR ) >= 0 ) {
-
-                log( ERROR, 91, path, message );
-            }
+            logIfLevelEnabled( ERROR, 91, path, message );
         },
 
         critical( message ) {
 
-            if( logLevels.indexOf( CRITICAL ) >= 0 ) {
-
-                log( CRITICAL, 31, path, message );
-            }
+            logIfLevelEnabled( CRITICAL, 31, path, message );
         }
     });
 
