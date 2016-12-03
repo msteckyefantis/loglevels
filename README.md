@@ -29,9 +29,9 @@ logger.critical( 'sexy monkey' );
 ```
 
 ####This code sample logs the following:
-(`__filename` in this example is `'/Users/User/epic__app/test/loggerTest/index.js'`)
-[![full.png](https://s4.postimg.org/ouj6m9yz1/full.png)](https://postimg.org/image/sqwii9jyh/)
+(`__filename` in this example is `'/user/dir_a/test/dir_b/test/dir_c/index.js'`)
+[![full_2.png](https://s16.postimg.org/hdkmd3205/full_2.png)](https://postimg.org/image/ejhgzmztt/)
 
 
 ####with the (relative) root and log level environment variables uncommented, the code sample above logs the following:
-[![partial.png](https://s12.postimg.org/o3kp7pikd/partial.png)](https://postimg.org/image/mbrqcsz7d/)
+[![partial_2.png](https://s17.postimg.org/a0rnmxubj/partial_2.png)](https://postimg.org/image/nug0bzmwr/)
