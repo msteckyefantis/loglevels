@@ -16,29 +16,21 @@ const levelToColourCode = Object.freeze({
 const allLogLevels = Object.freeze( Object.keys( levelToColourCode ) );
 
 // getting the optional LOG_LEVELS environment variable if it's defined:
-let envLogLevels;
+let envLogLevels = process.env.LOG_LEVELS;
 
-if( process.env.LOG_LEVELS ) {
+if( envLogLevels ) {
 
-    envLogLevels = Object.freeze( process.env.LOG_LEVELS.split( ' ' ) );
-}
-else {
-
-    envLogLevels = null;
+    envLogLevels = Object.freeze( envLogLevels.split( ' ' ) );
 }
 
 const logLevels = envLogLevels || allLogLevels;
 
 // getting the optional ROOT_LOGGER_PATH environment variable if it's defined:
-let envRootLoggerPath;
+let envRootLoggerPath = process.env.ROOT_LOGGER_PATH;
 
-if( process.env.ROOT_LOGGER_PATH ) {
+if( envRootLoggerPath) {
 
-    envRootLoggerPath = `${ process.env.ROOT_LOGGER_PATH }/`;
-}
-else {
-
-    envRootLoggerPath = null;
+    envRootLoggerPath = `${ envRootLoggerPath }/`;
 }
 
 const relativePathIndentifier = envRootLoggerPath;
