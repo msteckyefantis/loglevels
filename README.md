@@ -25,7 +25,6 @@ logger.info( 'your message here' );
 logger.warn( 'your message here' );
 logger.error( 'your message here' );
 logger.critical( 'sexy monkey' );
-
 ```
 
 ####This code sample logs the following:
