@@ -28,7 +28,7 @@ const logLevels = envLogLevels || allLogLevels;
 // getting the optional ROOT_LOGGER_PATH environment variable if it's defined:
 let envRootLoggerPath = process.env.ROOT_LOGGER_PATH;
 
-if( envRootLoggerPath) {
+if( envRootLoggerPath ) {
 
     envRootLoggerPath = `${ envRootLoggerPath }/`;
 }
