@@ -14,9 +14,10 @@ npm install loglevels
 ```.js
 'use strict';
 
-/* root and log level environment variables: */
+/* root, log level, and colour-off environment variables: */
 // process.env.ROOT_LOGGER_PATH = 'test_dir';
 // process.env.LOG_LEVELS = 'debug warn critical';
+// process.env.COLOUR_OFF = 'true';
 
 const logger = require( 'loglevels' ).setPathAndGetLogger( __filename );
 
@@ -29,8 +30,8 @@ logger.critical( 'sexy monkey' );
 
 ####This code sample logs the following:
 (`__filename` in this example is `'/user/dir_a/test_dir/dir_b/test_dir/dir_c/index.js'`)
-[![full_3.png](https://s16.postimg.org/yojpptcgl/full_3.png)](https://postimg.org/image/kuvd0rjv5/)
+[![full2_1.png](https://s13.postimg.org/odhg3yb07/full2_1.png)](https://postimg.org/image/ynjv370vn/)
 
 
-####with the (relative) root and log level environment variables uncommented, the code sample above logs the following:
-[![partial_4.png](https://s3.postimg.org/be4k4luj7/partial_4.png)](https://postimg.org/image/z53xmpuq7/)
+####with the (relative) root, log level, and colour-off environment variables uncommented, the code sample above logs the following:
+[![partial2_1.png](https://s18.postimg.org/b6t2tc3o9/partial2_1.png)](https://postimg.org/image/7n753j0yd/)

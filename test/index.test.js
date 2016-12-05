@@ -7,8 +7,14 @@ const sinon = require( 'sinon' );
 
 const freshy = require( 'freshy' )
 
+const ROOT_PATH = '../';
 
-describe( 'index.js', function() {
+const MODULE_PATH = 'index.js';
+
+const FULL_MODULE_PATH = ROOT_PATH + MODULE_PATH;
+
+
+describe( MODULE_PATH, function() {
 
     const controlMessage = 'mega monkey';
 
@@ -57,10 +63,11 @@ describe( 'index.js', function() {
 
             afterEach( function() {
 
-                freshy.unload( '../index.js' );
+                freshy.unload( FULL_MODULE_PATH );
 
                 delete process.env.LOG_LEVELS;
                 delete process.env.ROOT_LOGGER_PATH;
+                delete process.env.COLOUR_OFF;
             });
 
             it( 'logging: env log levels and root path, message is logged', function() {
@@ -69,7 +76,7 @@ describe( 'index.js', function() {
 
                 process.env.ROOT_LOGGER_PATH = controlRootPath;
 
-                logger = require( '../index.js' ).setPathAndGetLogger( controlFileName );
+                logger = require( FULL_MODULE_PATH ).setPathAndGetLogger( controlFileName );
 
                 logger[ levelData.level ]( controlMessage );
 
@@ -83,7 +90,7 @@ describe( 'index.js', function() {
 
             it( 'logging: default log levels and no root path, message is logged', function() {
 
-                logger = require( '../index.js' ).setPathAndGetLogger( '/a/b/c.js' );
+                logger = require( FULL_MODULE_PATH ).setPathAndGetLogger( '/a/b/c.js' );
 
                 logger[ levelData.level ]( controlMessage );
 
@@ -100,13 +107,29 @@ describe( 'index.js', function() {
 
                 process.env.LOG_LEVELS = "fake_level";
 
-                logger = require( '../index.js' ).setPathAndGetLogger( controlFileName );
+                logger = require( FULL_MODULE_PATH ).setPathAndGetLogger( controlFileName );
 
                 logger[ levelData.level ]( controlMessage );
 
                 consoleLogStub.restore();
 
                 expect( consoleLogStub.args.length ).equal( 0 );
+            });
+
+            it( 'logging: default log levels and no root path, colourOff mode set to "true", message is logged', function() {
+
+                process.env.COLOUR_OFF = 'true';
+
+                logger = require( FULL_MODULE_PATH ).setPathAndGetLogger( controlFileName );
+
+                logger[ levelData.level ]( controlMessage );
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 1 );
+                expect( consoleLogStub.args[0].length ).equal( 1 );
+                expect( consoleLogStub.args[0][0] )
+                    .equal( `${ levelData.level }: ${ controlFileName }: ${ controlMessage }` );
             });
         });
     });
