@@ -39,12 +39,12 @@ if( envRootLoggerPath ) {
 const relativePathIndentifier = envRootLoggerPath;
 
 // getting the optional LOGGER_COLOUR_OFF environment variable if it's defined:
-const colourOff = !!process.env.LOGGER_COLOUR_OFF;
+const colourIsOff = !!process.env.LOGGER_COLOUR_OFF;
 
 
 function log( level, path, message ) {
 
-    if( colourOff ) {
+    if( colourIsOff ) {
 
         return console.log( `${ level }: ${ path }: ${ message }` );
     }
@@ -59,7 +59,7 @@ function log( level, path, message ) {
 }
 
 
-function logIfOnAndLevelEnabled( level, path, message ) {
+function logIfOnAndLevelIsEnabled( level, path, message ) {
 
     const levelIsEnabled = (logLevels.indexOf( level ) >= 0);
 
@@ -78,7 +78,7 @@ function getLogger( path ) {
 
         logger[ logLevel ] = function( message ) {
 
-            logIfOnAndLevelEnabled( logLevel, path, message );
+            logIfOnAndLevelIsEnabled( logLevel, path, message );
         }
     });
 
