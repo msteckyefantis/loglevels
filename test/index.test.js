@@ -67,7 +67,7 @@ describe( MODULE_PATH, function() {
 
                 delete process.env.LOG_LEVELS;
                 delete process.env.ROOT_LOGGER_PATH;
-                delete process.env.COLOUR_OFF;
+                delete process.env.LOGGER_COLOUR_OFF;
             });
 
             it( 'logging: env log levels and root path, message is logged', function() {
@@ -116,9 +116,9 @@ describe( MODULE_PATH, function() {
                 expect( consoleLogStub.args.length ).equal( 0 );
             });
 
-            it( 'logging: default log levels and no root path, process.env.COLOUR_OFF is set to "true", message is logged', function() {
+            it( 'logging: default log levels and no root path, process.env.LOGGER_COLOUR_OFF is set to "true", message is logged', function() {
 
-                process.env.COLOUR_OFF = 'true';
+                process.env.LOGGER_COLOUR_OFF = 'true';
 
                 logger = require( FULL_MODULE_PATH ).setPathAndGetLogger( controlFileName );
 

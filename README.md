@@ -17,7 +17,7 @@ npm install loglevels
 /* environment variables: */
 // process.env.ROOT_LOGGER_PATH = 'test_dir';
 // process.env.LOG_LEVELS = 'debug warn critical';
-// process.env.COLOUR_OFF = 'true';
+// process.env.LOGGER_COLOUR_OFF = 'true';
 
 const logger = require( 'loglevels' ).setPathAndGetLogger( __filename );
 
