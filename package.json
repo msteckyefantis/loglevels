@@ -1,6 +1,6 @@
 {
   "name": "loglevels",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "single file no dependency colour logger",
   "main": "index.js",
   "scripts": {
