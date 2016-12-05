@@ -68,13 +68,16 @@ function log( level, path, message ) {
 
 function logIfOnAndLevelIsEnabled( level, path, message, project ) {
 
-    const levelIsEnabled = (logLevels.indexOf( level ) >= 0);
-
     const logLevelsIsOnForProject = (projectsLogLevelsIsOnFor.indexOf( project ) >= 0)
 
-    if( logLevelsIsOnForProject && levelIsEnabled ) {
+    if( logLevelsIsOnForProject ) {
 
-        log( level, path, message );
+        const levelIsEnabled = (logLevels.indexOf( level ) >= 0);
+
+        if( levelIsEnabled ) {
+
+            log( level, path, message );
+        }
     }
 }
 
