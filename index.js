@@ -41,6 +41,11 @@ const colourOff = !!process.env.COLOUR_OFF;
 
 function log( level, path, message ) {
 
+    if( colourOff ) {
+
+        return console.log( `${ level }: ${ path }: ${ message }` );
+    }
+
     const colourCode = levelToColourCode[ level ];
 
     const levelColour = `\x1b[${ colourCode }m`;
@@ -51,26 +56,13 @@ function log( level, path, message ) {
 }
 
 
-function logWithoutColour( level, path, message ) {
-
-    console.log( `${ level }: ${ path }: ${ message }` );
-}
-
-
 function logIfLevelEnabled( level, path, message ) {
 
     const levelIsEnabled = (logLevels.indexOf( level ) >= 0);
 
     if( levelIsEnabled ) {
 
-        if( !colourOff ) {
-
-            log( level, path, message );
-        }
-        else {
-
-            logWithoutColour( level, path, message );
-        }
+        log( level, path, message );
     }
 }
 
