@@ -23,7 +23,7 @@ if( envLogLevelsOnForComponents ) {
     envLogLevelsOnForComponents = Object.freeze( envLogLevelsOnForComponents.split( ' ' ) );
 }
 
-const componentsLogLevelsIsOnFor = envLogLevelsOnForComponents || [];
+const componentsLogLevelsIsOnFor = envLogLevelsOnForComponents || Object.freeze( [] );
 
 // getting the optional LOG_LEVELS environment variable if it's defined:
 let envLogLevels = process.env.LOG_LEVELS;
