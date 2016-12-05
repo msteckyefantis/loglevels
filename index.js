@@ -36,7 +36,7 @@ if( envRootLoggerPath ) {
 const relativePathIndentifier = envRootLoggerPath;
 
 // getting the optional COLOUR_OFF environment variable if it's defined:
-const colourMode = !!process.env.COLOUR_OFF;
+const colourOff = !!process.env.COLOUR_OFF;
 
 
 function log( level, path, message ) {
@@ -63,7 +63,7 @@ function logIfLevelEnabled( level, path, message ) {
 
     if( levelIsEnabled ) {
 
-        if( !colourMode ) {
+        if( !colourOff ) {
 
             log( level, path, message );
         }

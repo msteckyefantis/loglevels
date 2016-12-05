@@ -116,7 +116,7 @@ describe( MODULE_PATH, function() {
                 expect( consoleLogStub.args.length ).equal( 0 );
             });
 
-            it( 'logging: default log levels and no root path, colourOff mode set to "true", message is logged', function() {
+            it( 'logging: default log levels and no root path, process.env.COLOUR_OFF is set to "true", message is logged', function() {
 
                 process.env.COLOUR_OFF = 'true';
 
