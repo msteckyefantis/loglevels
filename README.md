@@ -14,7 +14,7 @@ npm install loglevels
 ```.js
 'use strict';
 
-/* On-Switch (special environment variable) */
+/* On-Switch (special environment variable): */
 process.env.LOG_LEVELS_ON = 'true';
 
 /* regular environment variables: */
