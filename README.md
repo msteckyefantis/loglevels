@@ -15,7 +15,7 @@ npm install loglevels
 'use strict';
 
 /* On-Switch (special environment variable): */
-process.env.LOG_LEVELS_ON_FOR_PROJECTS = 'project_a project_b';
+process.env.LOG_LEVELS_ON_FOR_PROJECTS = 'project_a project_b project_c';
 
 /* regular environment variables: */
 // process.env.ROOT_LOGGER_PATH = 'test_dir';
