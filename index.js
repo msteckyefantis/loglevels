@@ -119,6 +119,11 @@ module.exports = Object.freeze({
 
     setLocationAndGetLogger( path, component ) {
 
+        if( !path || !component ) {
+
+            throw new Error( 'LogLevels Error: no path and/or component' );
+        }
+
         const relativePath = getRealitivePath( path );
 
         return getLogger( relativePath, component );

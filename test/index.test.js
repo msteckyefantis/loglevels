@@ -1,4 +1,5 @@
 'use strict';
+/* jshint expr: true */
 /* jshint -W100 */
 
 const expect = require( 'chai' ).expect;
@@ -30,6 +31,100 @@ describe( MODULE_PATH, function() {
 
     let consoleLogStub;
 
+    beforeEach( function() {
+
+        process.env.LOG_LEVELS_ON_FOR_COMPONENTS = `${ controlComponentA } ${ controlComponentB }`;
+        consoleLogStub = sinon.stub( console, 'log' );
+    });
+
+    afterEach( function() {
+
+        freshy.unload( FULL_MODULE_PATH );
+
+        delete process.env.LOG_LEVELS;
+        delete process.env.ROOT_LOGGER_PATH;
+        delete process.env.LOGGER_COLOUR_OFF;
+        delete process.env.LOG_LEVELS_ON_FOR_COMPONENTS;
+    });
+
+    describe( 'init', function() {
+
+        it( 'init failure: no component provided', function() {
+
+            let errored = false;
+
+            try {
+
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( controlFileName );
+            }
+            catch( error ) {
+
+                if( error.message === 'LogLevels Error: no path and/or component' ) {
+
+                    errored = true;
+                }
+            }
+            finally {
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 0 );
+
+                expect( errored ).true;
+            }
+        });
+
+        it( 'init failure: no path or component provided', function() {
+
+            let errored = false;
+
+            try {
+
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger();
+            }
+            catch( error ) {
+
+                if( error.message === 'LogLevels Error: no path and/or component' ) {
+
+                    errored = true;
+                }
+            }
+            finally {
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 0 );
+
+                expect( errored ).true;
+            }
+        });
+
+        it( 'init failure: no path provided', function() {
+
+            let errored = false;
+
+            try {
+
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( undefined, controlComponentA );
+            }
+            catch( error ) {
+
+                if( error.message === 'LogLevels Error: no path and/or component' ) {
+
+                    errored = true;
+                }
+            }
+            finally {
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 0 );
+
+                expect( errored ).true;
+            }
+        });
+    });    
+
     [
         {
             level: 'debug',
@@ -59,22 +154,6 @@ describe( MODULE_PATH, function() {
     ].forEach( function( levelData ) {
 
         describe( `logger.${ levelData.level }`, function() {
-
-            beforeEach( function() {
-
-                process.env.LOG_LEVELS_ON_FOR_COMPONENTS = `${ controlComponentA } ${ controlComponentB }`;
-                consoleLogStub = sinon.stub( console, 'log' );
-            });
-
-            afterEach( function() {
-
-                freshy.unload( FULL_MODULE_PATH );
-
-                delete process.env.LOG_LEVELS;
-                delete process.env.ROOT_LOGGER_PATH;
-                delete process.env.LOGGER_COLOUR_OFF;
-                delete process.env.LOG_LEVELS_ON_FOR_COMPONENTS;
-            });
 
             it( 'logging: env log levels and root path, message is logged', function() {
 
