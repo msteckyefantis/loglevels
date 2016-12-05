@@ -15,6 +15,9 @@ const levelToColourCode = Object.freeze({
 
 const allLogLevels = Object.freeze( Object.keys( levelToColourCode ) );
 
+// getting the optional LOG_LEVELS_ON environment variable if it's defined:
+const logLevelsIsOn = !!process.env.LOG_LEVELS_ON;
+
 // getting the optional LOG_LEVELS environment variable if it's defined:
 let envLogLevels = process.env.LOG_LEVELS;
 
@@ -56,11 +59,11 @@ function log( level, path, message ) {
 }
 
 
-function logIfLevelEnabled( level, path, message ) {
+function logIfOnAndLevelEnabled( level, path, message ) {
 
     const levelIsEnabled = (logLevels.indexOf( level ) >= 0);
 
-    if( levelIsEnabled ) {
+    if( logLevelsIsOn && levelIsEnabled ) {
 
         log( level, path, message );
     }
@@ -75,7 +78,7 @@ function getLogger( path ) {
 
         logger[ logLevel ] = function( message ) {
 
-            logIfLevelEnabled( logLevel, path, message );
+            logIfOnAndLevelEnabled( logLevel, path, message );
         }
     });
 

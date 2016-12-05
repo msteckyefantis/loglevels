@@ -14,7 +14,10 @@ npm install loglevels
 ```.js
 'use strict';
 
-/* environment variables: */
+/* On-Switch (special environment variable) */
+process.env.LOG_LEVELS_ON = 'true';
+
+/* regular environment variables: */
 // process.env.ROOT_LOGGER_PATH = 'test_dir';
 // process.env.LOG_LEVELS = 'debug warn critical';
 // process.env.LOGGER_COLOUR_OFF = 'true';
@@ -33,5 +36,5 @@ logger.critical( 'sexy monkey' );
 [![full2_1.png](https://s13.postimg.org/odhg3yb07/full2_1.png)](https://postimg.org/image/ynjv370vn/)
 
 
-####with all the environment variables uncommented, the code sample above logs the following:
+####with all the regular environment variables uncommented, the code sample above logs the following:
 [![partial2_1.png](https://s18.postimg.org/b6t2tc3o9/partial2_1.png)](https://postimg.org/image/7n753j0yd/)

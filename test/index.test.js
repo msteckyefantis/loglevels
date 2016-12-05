@@ -58,6 +58,7 @@ describe( MODULE_PATH, function() {
 
             beforeEach( function() {
 
+                process.env.LOG_LEVELS_ON = 'true';
                 consoleLogStub = sinon.stub( console, 'log' );
             });
 
@@ -68,6 +69,7 @@ describe( MODULE_PATH, function() {
                 delete process.env.LOG_LEVELS;
                 delete process.env.ROOT_LOGGER_PATH;
                 delete process.env.LOGGER_COLOUR_OFF;
+                delete process.env.LOG_LEVELS_ON;
             });
 
             it( 'logging: env log levels and root path, message is logged', function() {
@@ -130,6 +132,19 @@ describe( MODULE_PATH, function() {
                 expect( consoleLogStub.args[0].length ).equal( 1 );
                 expect( consoleLogStub.args[0][0] )
                     .equal( `${ levelData.level }: ${ controlFileName }: ${ controlMessage }` );
+            });
+
+            it( 'logging: default log levels and no root path, process.env.LOG_LEVELS_ON is not set, message is not logged', function() {
+
+                delete process.env.LOG_LEVELS_ON;
+
+                logger = require( FULL_MODULE_PATH ).setPathAndGetLogger( controlFileName );
+
+                logger[ levelData.level ]( controlMessage );
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 0 );
             });
         });
     });
