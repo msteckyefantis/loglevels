@@ -15,16 +15,16 @@ npm install loglevels
 'use strict';
 
 /* On-Switch (special environment variable): */
-process.env.LOG_LEVELS_ON_FOR_PROJECTS = 'project_a project_b project_c';
+process.env.LOG_LEVELS_ON_FOR_COMPONENTS = 'component_a component_b component_c';
 
 /* regular environment variables: */
 // process.env.ROOT_LOGGER_PATH = 'test_dir';
 // process.env.LOG_LEVELS = 'debug warn critical';
 // process.env.LOGGER_COLOUR_OFF = 'true';
 
-const project = 'project_b';
+const component = 'component_b';
 
-const logger = require( 'loglevels' ).setLocationAndGetLogger( __filename, project );
+const logger = require( 'loglevels' ).setLocationAndGetLogger( __filename, component );
 
 logger.debug( 'your message here' );
 logger.info( 'your message here' );

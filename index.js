@@ -15,15 +15,15 @@ const levelToColourCode = Object.freeze({
 
 const allLogLevels = Object.freeze( Object.keys( levelToColourCode ) );
 
-// getting the optional LOG_LEVELS_ON_FOR_PROJECTS environment variable if it's defined:
-let envLogLevelsOnForProjects = process.env.LOG_LEVELS_ON_FOR_PROJECTS;
+// getting the optional LOG_LEVELS_ON_FOR_COMPONENTS environment variable if it's defined:
+let envLogLevelsOnForComponents = process.env.LOG_LEVELS_ON_FOR_COMPONENTS;
 
-if( envLogLevelsOnForProjects ) {
+if( envLogLevelsOnForComponents ) {
 
-    envLogLevelsOnForProjects = Object.freeze( envLogLevelsOnForProjects.split( ' ' ) );
+    envLogLevelsOnForComponents = Object.freeze( envLogLevelsOnForComponents.split( ' ' ) );
 }
 
-const projectsLogLevelsIsOnFor = envLogLevelsOnForProjects || [];
+const componentsLogLevelsIsOnFor = envLogLevelsOnForComponents || [];
 
 // getting the optional LOG_LEVELS environment variable if it's defined:
 let envLogLevels = process.env.LOG_LEVELS;
@@ -66,11 +66,11 @@ function log( level, path, message ) {
 }
 
 
-function logIfOnAndLevelIsEnabled( level, path, message, project ) {
+function logIfOnAndLevelIsEnabled( level, path, message, component ) {
 
-    const logLevelsIsOnForProject = (projectsLogLevelsIsOnFor.indexOf( project ) >= 0)
+    const logLevelsIsOnForComponent = (componentsLogLevelsIsOnFor.indexOf( component ) >= 0)
 
-    if( logLevelsIsOnForProject ) {
+    if( logLevelsIsOnForComponent ) {
 
         const levelIsEnabled = (logLevels.indexOf( level ) >= 0);
 
@@ -82,7 +82,7 @@ function logIfOnAndLevelIsEnabled( level, path, message, project ) {
 }
 
 
-function getLogger( path, project ) {
+function getLogger( path, component ) {
 
     const logger = {};
 
@@ -90,7 +90,7 @@ function getLogger( path, project ) {
 
         logger[ logLevel ] = function( message ) {
 
-            logIfOnAndLevelIsEnabled( logLevel, path, message, project );
+            logIfOnAndLevelIsEnabled( logLevel, path, message, component );
         }
     });
 
@@ -117,10 +117,10 @@ function getRealitivePath( path ) {
 
 module.exports = Object.freeze({
 
-    setLocationAndGetLogger( path, project ) {
+    setLocationAndGetLogger( path, component ) {
 
         const relativePath = getRealitivePath( path );
 
-        return getLogger( relativePath, project );
+        return getLogger( relativePath, component );
     }
 });
