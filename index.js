@@ -15,8 +15,15 @@ const levelToColourCode = Object.freeze({
 
 const allLogLevels = Object.freeze( Object.keys( levelToColourCode ) );
 
-// getting the optional LOG_LEVELS_ON environment variable if it's defined:
-const logLevelsIsOn = !!process.env.LOG_LEVELS_ON;
+// getting the optional LOG_LEVELS_ON_FOR_PROJECTS environment variable if it's defined:
+let envLogLevelsOnForProjects = process.env.LOG_LEVELS_ON_FOR_PROJECTS;
+
+if( envLogLevelsOnForProjects ) {
+
+    envLogLevelsOnForProjects = Object.freeze( envLogLevelsOnForProjects.split( ' ' ) );
+}
+
+const projectsLogLevelsIsOnFor = envLogLevelsOnForProjects || [];
 
 // getting the optional LOG_LEVELS environment variable if it's defined:
 let envLogLevels = process.env.LOG_LEVELS;
@@ -59,18 +66,20 @@ function log( level, path, message ) {
 }
 
 
-function logIfOnAndLevelIsEnabled( level, path, message ) {
+function logIfOnAndLevelIsEnabled( level, path, message, project ) {
 
     const levelIsEnabled = (logLevels.indexOf( level ) >= 0);
 
-    if( logLevelsIsOn && levelIsEnabled ) {
+    const logLevelsIsOnForProject = (projectsLogLevelsIsOnFor.indexOf( project ) >= 0)
+
+    if( logLevelsIsOnForProject && levelIsEnabled ) {
 
         log( level, path, message );
     }
 }
 
 
-function getLogger( path ) {
+function getLogger( path, project ) {
 
     const logger = {};
 
@@ -78,7 +87,7 @@ function getLogger( path ) {
 
         logger[ logLevel ] = function( message ) {
 
-            logIfOnAndLevelIsEnabled( logLevel, path, message );
+            logIfOnAndLevelIsEnabled( logLevel, path, message, project );
         }
     });
 
@@ -105,10 +114,10 @@ function getRealitivePath( path ) {
 
 module.exports = Object.freeze({
 
-    setPathAndGetLogger( path ) {
+    setLocationAndGetLogger( path, project ) {
 
         const relativePath = getRealitivePath( path );
 
-        return getLogger( relativePath );
+        return getLogger( relativePath, project );
     }
 });

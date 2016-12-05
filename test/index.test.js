@@ -22,6 +22,10 @@ describe( MODULE_PATH, function() {
 
     const controlRootPath = '/b/c';
 
+    const controlProjectA = 'project_a';
+
+    const controlProjectB = 'project_b';
+
     let logger;
 
     let consoleLogStub;
@@ -58,7 +62,7 @@ describe( MODULE_PATH, function() {
 
             beforeEach( function() {
 
-                process.env.LOG_LEVELS_ON = 'true';
+                process.env.LOG_LEVELS_ON_FOR_PROJECTS = `${ controlProjectA } ${ controlProjectB }`;
                 consoleLogStub = sinon.stub( console, 'log' );
             });
 
@@ -69,7 +73,7 @@ describe( MODULE_PATH, function() {
                 delete process.env.LOG_LEVELS;
                 delete process.env.ROOT_LOGGER_PATH;
                 delete process.env.LOGGER_COLOUR_OFF;
-                delete process.env.LOG_LEVELS_ON;
+                delete process.env.LOG_LEVELS_ON_FOR_PROJECTS;
             });
 
             it( 'logging: env log levels and root path, message is logged', function() {
@@ -78,7 +82,7 @@ describe( MODULE_PATH, function() {
 
                 process.env.ROOT_LOGGER_PATH = controlRootPath;
 
-                logger = require( FULL_MODULE_PATH ).setPathAndGetLogger( controlFileName );
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( controlFileName, controlProjectA );
 
                 logger[ levelData.level ]( controlMessage );
 
@@ -92,7 +96,7 @@ describe( MODULE_PATH, function() {
 
             it( 'logging: default log levels and no root path, message is logged', function() {
 
-                logger = require( FULL_MODULE_PATH ).setPathAndGetLogger( '/a/b/c.js' );
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( '/a/b/c.js', controlProjectB );
 
                 logger[ levelData.level ]( controlMessage );
 
@@ -109,7 +113,7 @@ describe( MODULE_PATH, function() {
 
                 process.env.LOG_LEVELS = "fake_level";
 
-                logger = require( FULL_MODULE_PATH ).setPathAndGetLogger( controlFileName );
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( controlFileName, controlProjectA );
 
                 logger[ levelData.level ]( controlMessage );
 
@@ -122,7 +126,7 @@ describe( MODULE_PATH, function() {
 
                 process.env.LOGGER_COLOUR_OFF = 'true';
 
-                logger = require( FULL_MODULE_PATH ).setPathAndGetLogger( controlFileName );
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( controlFileName, controlProjectB );
 
                 logger[ levelData.level ]( controlMessage );
 
@@ -134,11 +138,11 @@ describe( MODULE_PATH, function() {
                     .equal( `${ levelData.level }: ${ controlFileName }: ${ controlMessage }` );
             });
 
-            it( 'logging: default log levels and no root path, process.env.LOG_LEVELS_ON is not set, message is not logged', function() {
+            it( 'logging: default log levels and no root path, log levels not on for any project, message is not logged', function() {
 
-                delete process.env.LOG_LEVELS_ON;
+                delete process.env.LOG_LEVELS_ON_FOR_PROJECTS;
 
-                logger = require( FULL_MODULE_PATH ).setPathAndGetLogger( controlFileName );
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( controlFileName, controlProjectA );
 
                 logger[ levelData.level ]( controlMessage );
 
