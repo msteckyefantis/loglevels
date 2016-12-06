@@ -1,9 +1,5 @@
 'use strict';
 
-const pathColour = '\x1b[90m';
-
-const defaultColour = '\x1b[0m';
-
 const levelToColourCode = Object.freeze({
 
     debug: 34,
@@ -12,6 +8,12 @@ const levelToColourCode = Object.freeze({
     error: 91,
     critical: 31
 });
+
+const pathColour = '\x1b[90m';
+
+const defaultColour = '\x1b[0m';
+
+const STRING = 'string';
 
 const allLogLevels = Object.freeze( Object.keys( levelToColourCode ) );
 
@@ -126,6 +128,11 @@ module.exports = Object.freeze({
         if( !path || !component ) {
 
             throw new Error( 'LogLevels Error: no path and/or component' );
+        }
+
+        if( (typeof path !== STRING) || (typeof component !== STRING) ) {
+
+            throw new Error( 'LogLevels Error: path and/or component are not strings' );
         }
 
         const relativePath = getRealitivePath( path );

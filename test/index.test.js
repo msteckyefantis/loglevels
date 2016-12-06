@@ -123,6 +123,81 @@ describe( MODULE_PATH, function() {
                 expect( errored ).true;
             }
         });
+
+        it( 'init failure: path is not a string', function() {
+
+            let errored = false;
+
+            try {
+
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( { xxx: 69 }, controlComponentA );
+            }
+            catch( error ) {
+
+                if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
+
+                    errored = true;
+                }
+            }
+            finally {
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 0 );
+
+                expect( errored ).true;
+            }
+        });
+
+        it( 'init failure: component is not a string', function() {
+
+            let errored = false;
+
+            try {
+
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( controlFileName, { xxx: 69 } );
+            }
+            catch( error ) {
+
+                if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
+
+                    errored = true;
+                }
+            }
+            finally {
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 0 );
+
+                expect( errored ).true;
+            }
+        });
+
+        it( 'init failure: path and component are not strings', function() {
+
+            let errored = false;
+
+            try {
+
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( { xxx: 69 }, { yyy: 69 } );
+            }
+            catch( error ) {
+
+                if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
+
+                    errored = true;
+                }
+            }
+            finally {
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 0 );
+
+                expect( errored ).true;
+            }
+        });
     });
 
     [
