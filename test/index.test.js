@@ -27,6 +27,13 @@ describe( MODULE_PATH, function() {
 
     const controlComponentB = 'component_b';
 
+    let longString = '';
+
+    for( let i = 0; i < 3000; i++ ) {
+
+        longString += 'a';
+    }
+
     let logger;
 
     let consoleLogStub;
@@ -185,6 +192,81 @@ describe( MODULE_PATH, function() {
             catch( error ) {
 
                 if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
+
+                    errored = true;
+                }
+            }
+            finally {
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 0 );
+
+                expect( errored ).true;
+            }
+        });
+
+        it( 'init failure: path is too long', function() {
+
+            let errored = false;
+
+            try {
+
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( longString, controlComponentA );
+            }
+            catch( error ) {
+
+                if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
+
+                    errored = true;
+                }
+            }
+            finally {
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 0 );
+
+                expect( errored ).true;
+            }
+        });
+
+        it( 'init failure: component is too long', function() {
+
+            let errored = false;
+
+            try {
+
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( controlMessage, longString );
+            }
+            catch( error ) {
+
+                if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
+
+                    errored = true;
+                }
+            }
+            finally {
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 0 );
+
+                expect( errored ).true;
+            }
+        });
+
+        it( 'init failure: path and component are too long', function() {
+
+            let errored = false;
+
+            try {
+
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( longString, longString );
+            }
+            catch( error ) {
+
+                if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
 
                     errored = true;
                 }

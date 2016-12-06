@@ -15,6 +15,15 @@ const defaultColour = '\x1b[0m';
 
 const STRING = 'string';
 
+const pathAndComponentLengthLimit = 2083;
+
+const missingPathAndOrComponentMessage = 'LogLevels Error: no path and/or component';
+
+const nonStringPathAndOrComponentMessage = 'LogLevels Error: path and/or component are not strings';
+
+const tooLongPathAndOrComponentMessage = 'LogLevels Error: path and/or component are too long ' +
+    `(max length for either is ${ pathAndComponentLengthLimit } characters)`;
+
 const allLogLevels = Object.freeze( Object.keys( levelToColourCode ) );
 
 // getting the optional LOG_LEVELS_ON_FOR_COMPONENTS environment variable if it's defined:
@@ -121,19 +130,31 @@ function getRealitivePath( path ) {
 }
 
 
+function validatePathAndComponent( path, component ) {
+
+    if( !path || !component ) {
+
+        throw new Error( missingPathAndOrComponentMessage );
+    }
+
+    if( (typeof path !== STRING) || (typeof component !== STRING) ) {
+
+        throw new Error( nonStringPathAndOrComponentMessage );
+    }
+
+    if( (path.length > pathAndComponentLengthLimit) ||
+        (component.length > pathAndComponentLengthLimit) ) {
+
+        throw new Error( tooLongPathAndOrComponentMessage );
+    }
+}
+
+
 module.exports = Object.freeze({
 
     setLocationAndGetLogger( path, component ) {
 
-        if( !path || !component ) {
-
-            throw new Error( 'LogLevels Error: no path and/or component' );
-        }
-
-        if( (typeof path !== STRING) || (typeof component !== STRING) ) {
-
-            throw new Error( 'LogLevels Error: path and/or component are not strings' );
-        }
+        validatePathAndComponent( path, component );
 
         const relativePath = getRealitivePath( path );
 
