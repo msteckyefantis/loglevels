@@ -43,7 +43,7 @@ if( envRootLoggerPath ) {
     envRootLoggerPath = `${ envRootLoggerPath }/`;
 }
 
-const relativePathIndentifier = envRootLoggerPath;
+const relativePathIdentifier = envRootLoggerPath;
 
 // getting the optional LOGGER_COLOUR_OFF environment variable if it's defined:
 const colourIsOff = !!process.env.LOGGER_COLOUR_OFF;
@@ -100,12 +100,16 @@ function getLogger( path, component ) {
 
 function getRealitivePath( path ) {
 
-    if( relativePathIndentifier ) {
+    const lastIndexOfIdentifierInPath = path.lastIndexOf( relativePathIdentifier );
+
+    const identifierIsInPath = (lastIndexOfIdentifierInPath >= 0);
+
+    if( identifierIsInPath ) {
 
         const relativePath = path.substring(
 
-            path.lastIndexOf( relativePathIndentifier ) +
-            relativePathIndentifier.length
+            lastIndexOfIdentifierInPath +
+            relativePathIdentifier.length
         );
 
         return relativePath;

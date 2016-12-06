@@ -123,7 +123,7 @@ describe( MODULE_PATH, function() {
                 expect( errored ).true;
             }
         });
-    });    
+    });
 
     [
         {
@@ -228,6 +228,24 @@ describe( MODULE_PATH, function() {
                 consoleLogStub.restore();
 
                 expect( consoleLogStub.args.length ).equal( 0 );
+            });
+
+            it( 'logging: env log levels and root path which is not in the path name, message is logged', function() {
+
+                process.env.LOG_LEVELS = "debug info warn error critical";
+
+                process.env.ROOT_LOGGER_PATH = 'xxx.js';
+
+                logger = require( FULL_MODULE_PATH ).setLocationAndGetLogger( controlFileName, controlComponentA );
+
+                logger[ levelData.level ]( controlMessage );
+
+                consoleLogStub.restore();
+
+                expect( consoleLogStub.args.length ).equal( 1 );
+                expect( consoleLogStub.args[0].length ).equal( 1 );
+                expect( consoleLogStub.args[0][0] )
+                    .equal( `\u001b[${ levelData.colourCode }m${ levelData.level }: \u001b[90m/a/b/c/d/e/f.js:\u001b[${ levelData.colourCode }m mega monkey\u001b[0m` );
             });
         });
     });
