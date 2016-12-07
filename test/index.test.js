@@ -58,7 +58,7 @@ describe( MODULE_PATH, function() {
 
         it( 'init failure: no component provided', function() {
 
-            let errored = false;
+            let erroredAsExpected = false;
 
             try {
 
@@ -68,7 +68,7 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: no path and/or component' ) {
 
-                    errored = true;
+                    erroredAsExpected = true;
                 }
             }
             finally {
@@ -77,13 +77,13 @@ describe( MODULE_PATH, function() {
 
                 expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( errored ).true;
+                expect( erroredAsExpected ).true;
             }
         });
 
         it( 'init failure: no path or component provided', function() {
 
-            let errored = false;
+            let erroredAsExpected = false;
 
             try {
 
@@ -93,7 +93,7 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: no path and/or component' ) {
 
-                    errored = true;
+                    erroredAsExpected = true;
                 }
             }
             finally {
@@ -102,13 +102,13 @@ describe( MODULE_PATH, function() {
 
                 expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( errored ).true;
+                expect( erroredAsExpected ).true;
             }
         });
 
         it( 'init failure: no path provided', function() {
 
-            let errored = false;
+            let erroredAsExpected = false;
 
             try {
 
@@ -118,7 +118,7 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: no path and/or component' ) {
 
-                    errored = true;
+                    erroredAsExpected = true;
                 }
             }
             finally {
@@ -127,13 +127,13 @@ describe( MODULE_PATH, function() {
 
                 expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( errored ).true;
+                expect( erroredAsExpected ).true;
             }
         });
 
         it( 'init failure: path is not a string', function() {
 
-            let errored = false;
+            let erroredAsExpected = false;
 
             try {
 
@@ -143,7 +143,7 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
 
-                    errored = true;
+                    erroredAsExpected = true;
                 }
             }
             finally {
@@ -152,13 +152,13 @@ describe( MODULE_PATH, function() {
 
                 expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( errored ).true;
+                expect( erroredAsExpected ).true;
             }
         });
 
         it( 'init failure: component is not a string', function() {
 
-            let errored = false;
+            let erroredAsExpected = false;
 
             try {
 
@@ -168,7 +168,7 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
 
-                    errored = true;
+                    erroredAsExpected = true;
                 }
             }
             finally {
@@ -177,13 +177,13 @@ describe( MODULE_PATH, function() {
 
                 expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( errored ).true;
+                expect( erroredAsExpected ).true;
             }
         });
 
         it( 'init failure: path and component are not strings', function() {
 
-            let errored = false;
+            let erroredAsExpected = false;
 
             try {
 
@@ -193,7 +193,7 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
 
-                    errored = true;
+                    erroredAsExpected = true;
                 }
             }
             finally {
@@ -202,13 +202,13 @@ describe( MODULE_PATH, function() {
 
                 expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( errored ).true;
+                expect( erroredAsExpected ).true;
             }
         });
 
         it( 'init failure: path is too long', function() {
 
-            let errored = false;
+            let erroredAsExpected = false;
 
             try {
 
@@ -218,7 +218,7 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
 
-                    errored = true;
+                    erroredAsExpected = true;
                 }
             }
             finally {
@@ -227,13 +227,13 @@ describe( MODULE_PATH, function() {
 
                 expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( errored ).true;
+                expect( erroredAsExpected ).true;
             }
         });
 
         it( 'init failure: component is too long', function() {
 
-            let errored = false;
+            let erroredAsExpected = false;
 
             try {
 
@@ -243,7 +243,7 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
 
-                    errored = true;
+                    erroredAsExpected = true;
                 }
             }
             finally {
@@ -252,13 +252,13 @@ describe( MODULE_PATH, function() {
 
                 expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( errored ).true;
+                expect( erroredAsExpected ).true;
             }
         });
 
         it( 'init failure: path and component are too long', function() {
 
-            let errored = false;
+            let erroredAsExpected = false;
 
             try {
 
@@ -268,7 +268,7 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
 
-                    errored = true;
+                    erroredAsExpected = true;
                 }
             }
             finally {
@@ -277,7 +277,7 @@ describe( MODULE_PATH, function() {
 
                 expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( errored ).true;
+                expect( erroredAsExpected ).true;
             }
         });
     });
