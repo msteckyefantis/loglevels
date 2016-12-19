@@ -101,7 +101,7 @@ const getLogger = subzero.megaFreeze( function( path, component ) {
 
     allLogLevels.forEach( function( logLevel ) {
 
-        logger[ logLevel ] = function( message ) {
+        logger[ logLevel ] = message => {
 
             logIfOnAndLevelIsEnabled( logLevel, path, message, component );
         }

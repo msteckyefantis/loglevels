@@ -66,19 +66,13 @@ describe( MODULE_PATH, function() {
 
             expect( loggerModule ).to.be.frozen;
             expect( loggerModule.setLocationAndGetLogger ).to.be.frozen;
-            expect( loggerModule.setLocationAndGetLogger.prototype ).to.be.frozen;
 
             expect( logger ).to.be.frozen;
             expect( logger.debug ).to.be.frozen;
-            expect( logger.debug.prototype ).to.be.frozen;
             expect( logger.info ).to.be.frozen;
-            expect( logger.info.prototype ).to.be.frozen;
             expect( logger.warn ).to.be.frozen;
-            expect( logger.warn.prototype ).to.be.frozen;
             expect( logger.error ).to.be.frozen;
-            expect( logger.error.prototype ).to.be.frozen;
             expect( logger.critical ).to.be.frozen;
-            expect( logger.critical.prototype ).to.be.frozen;
 
             expect( consoleLogStub.args.length ).to.equal( 0 );
         });
