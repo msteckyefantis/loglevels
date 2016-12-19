@@ -26,24 +26,24 @@ const nonStringPathAndOrComponentMessage = 'LogLevels Error: path and/or compone
 const tooLongPathAndOrComponentMessage = 'LogLevels Error: path and/or component are too long ' +
     `(max length for either is ${ pathAndComponentLengthLimit } characters)`;
 
-const allLogLevels = Object.freeze( Object.keys( levelToColourCode ) );
+const allLogLevels = subzero.megaFreeze( Object.keys( levelToColourCode ) );
 
 // getting the optional LOG_LEVELS_ON_FOR_COMPONENTS environment variable if it's defined:
 let envLogLevelsOnForComponents = process.env.LOG_LEVELS_ON_FOR_COMPONENTS;
 
 if( envLogLevelsOnForComponents ) {
 
-    envLogLevelsOnForComponents = Object.freeze( envLogLevelsOnForComponents.split( ' ' ) );
+    envLogLevelsOnForComponents = subzero.megaFreeze( envLogLevelsOnForComponents.split( ' ' ) );
 }
 
-const componentsLogLevelsIsOnFor = envLogLevelsOnForComponents || Object.freeze( [] );
+const componentsLogLevelsIsOnFor = envLogLevelsOnForComponents || subzero.megaFreeze( [] );
 
 // getting the optional LOG_LEVELS environment variable if it's defined:
 let envLogLevels = process.env.LOG_LEVELS;
 
 if( envLogLevels ) {
 
-    envLogLevels = Object.freeze( envLogLevels.split( ' ' ) );
+    envLogLevels = subzero.megaFreeze( envLogLevels.split( ' ' ) );
 }
 
 const logLevels = envLogLevels || allLogLevels;

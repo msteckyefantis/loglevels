@@ -66,6 +66,7 @@ describe( MODULE_PATH, function() {
 
             expect( loggerModule ).to.be.frozen;
             expect( loggerModule.setLocationAndGetLogger ).to.be.frozen;
+            expect( loggerModule.setLocationAndGetLogger.prototype ).to.be.frozen;
 
             expect( logger ).to.be.frozen;
             expect( logger.debug ).to.be.frozen;
