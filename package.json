@@ -1,6 +1,6 @@
 {
   "name": "loglevels",
-  "version": "6.0.6",
+  "version": "7.0.0",
   "description": "single file no dependency colour logger",
   "main": "index.js",
   "scripts": {
@@ -31,5 +31,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/msteckyefantis/loglevels"
+  },
+  "dependencies": {
+    "subzero": "^5.0.21"
   }
 }

@@ -56,6 +56,32 @@ describe( MODULE_PATH, function() {
 
     describe( 'init', function() {
 
+        it( 'init: checking frozeness', function() {
+
+            const loggerModule = require( FULL_MODULE_PATH )
+
+            logger = loggerModule.setLocationAndGetLogger( controlFileName, controlComponentA );
+
+            consoleLogStub.restore();
+
+            expect( loggerModule ).to.be.frozen;
+            expect( loggerModule.setLocationAndGetLogger ).to.be.frozen;
+
+            expect( logger ).to.be.frozen;
+            expect( logger.debug ).to.be.frozen;
+            expect( logger.debug.prototype ).to.be.frozen;
+            expect( logger.info ).to.be.frozen;
+            expect( logger.info.prototype ).to.be.frozen;
+            expect( logger.warn ).to.be.frozen;
+            expect( logger.warn.prototype ).to.be.frozen;
+            expect( logger.error ).to.be.frozen;
+            expect( logger.error.prototype ).to.be.frozen;
+            expect( logger.critical ).to.be.frozen;
+            expect( logger.critical.prototype ).to.be.frozen;
+
+            expect( consoleLogStub.args.length ).to.equal( 0 );
+        });
+
         it( 'init failure: no component provided', function() {
 
             let erroredAsExpected = false;

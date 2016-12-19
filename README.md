@@ -1,7 +1,7 @@
 #LogLevels [![npm version](https://badge.fury.io/js/loglevels.svg)](https://badge.fury.io/js/loglevels) [![Build Status](https://travis-ci.org/msteckyefantis/loglevels.svg?branch=master)](https://travis-ci.org/msteckyefantis/loglevels)
 
 ##About:
-Sensual, single file, no dependency, colour logger. Just for you baby🐬.
+Sensual, single file, single dependency, colour logger. Just for you baby🐬.
 
 ##install:
 

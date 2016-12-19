@@ -1,6 +1,8 @@
 'use strict';
 
-const levelToColourCode = Object.freeze({
+const subzero = require( 'subzero' );
+
+const levelToColourCode = subzero.megaFreeze({
 
     debug: 34,
     info: 92,
@@ -60,7 +62,7 @@ const relativePathIdentifier = envRootLoggerPath;
 const colourIsOff = !!process.env.LOGGER_COLOUR_OFF;
 
 
-function log( level, path, message ) {
+const log = subzero.megaFreeze( function( level, path, message ) {
 
     if( colourIsOff ) {
 
@@ -74,10 +76,10 @@ function log( level, path, message ) {
     const loggerMessage = `${ level }: ${ pathColour }${ path }:${ levelColour } ${ message }`;
 
     console.log( `${ levelColour }${ loggerMessage }${ defaultColour }` );
-}
+});
 
 
-function logIfOnAndLevelIsEnabled( level, path, message, component ) {
+const logIfOnAndLevelIsEnabled = subzero.megaFreeze( function( level, path, message, component ) {
 
     const logLevelsIsOnForComponent = (componentsLogLevelsIsOnFor.indexOf( component ) >= 0)
 
@@ -90,10 +92,10 @@ function logIfOnAndLevelIsEnabled( level, path, message, component ) {
             log( level, path, message );
         }
     }
-}
+});
 
 
-function getLogger( path, component ) {
+const getLogger = subzero.megaFreeze( function( path, component ) {
 
     const logger = {};
 
@@ -105,11 +107,11 @@ function getLogger( path, component ) {
         }
     });
 
-    return Object.freeze( logger );
-}
+    return subzero.megaFreeze( logger );
+});
 
 
-function getRealitivePath( path ) {
+const getRealitivePath = subzero.megaFreeze( function( path ) {
 
     const lastIndexOfIdentifierInPath = path.lastIndexOf( relativePathIdentifier );
 
@@ -127,10 +129,10 @@ function getRealitivePath( path ) {
     }
 
     return path;
-}
+});
 
 
-function validatePathAndComponent( path, component ) {
+const validatePathAndComponent = subzero.megaFreeze( function ( path, component ) {
 
     if( !path || !component ) {
 
@@ -147,10 +149,10 @@ function validatePathAndComponent( path, component ) {
 
         throw new Error( tooLongPathAndOrComponentMessage );
     }
-}
+});
 
 
-module.exports = Object.freeze({
+module.exports = subzero.megaFreeze({
 
     setLocationAndGetLogger( path, component ) {
 
