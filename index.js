@@ -62,7 +62,7 @@ const relativePathIdentifier = envRootLoggerPath;
 const colourIsOff = !!process.env.LOGGER_COLOUR_OFF;
 
 
-const log = subzero.megaFreeze( function( level, path, message ) {
+const log = subzero.megaFreeze( ( level, path, message ) => {
 
     if( colourIsOff ) {
 
@@ -79,7 +79,7 @@ const log = subzero.megaFreeze( function( level, path, message ) {
 });
 
 
-const logIfOnAndLevelIsEnabled = subzero.megaFreeze( function( level, path, message, component ) {
+const logIfOnAndLevelIsEnabled = subzero.megaFreeze( ( level, path, message, component ) => {
 
     const logLevelsIsOnForComponent = (componentsLogLevelsIsOnFor.indexOf( component ) >= 0)
 
@@ -95,7 +95,7 @@ const logIfOnAndLevelIsEnabled = subzero.megaFreeze( function( level, path, mess
 });
 
 
-const getLogger = subzero.megaFreeze( function( path, component ) {
+const getLogger = subzero.megaFreeze( ( path, component ) => {
 
     const logger = {};
 
@@ -111,7 +111,7 @@ const getLogger = subzero.megaFreeze( function( path, component ) {
 });
 
 
-const getRealitivePath = subzero.megaFreeze( function( path ) {
+const getRealitivePath = subzero.megaFreeze( path => {
 
     const lastIndexOfIdentifierInPath = path.lastIndexOf( relativePathIdentifier );
 
@@ -132,7 +132,7 @@ const getRealitivePath = subzero.megaFreeze( function( path ) {
 });
 
 
-const validatePathAndComponent = subzero.megaFreeze( function ( path, component ) {
+const validatePathAndComponent = subzero.megaFreeze( ( path, component ) => {
 
     if( !path || !component ) {
 
