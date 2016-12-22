@@ -13,6 +13,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "freshy": "^1.0.2",
+    "is-deep-frozen": "^3.0.15",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "sinon": "^1.17.6"

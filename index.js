@@ -136,18 +136,18 @@ const validatePathAndComponent = subzero.megaFreeze( ( path, component ) => {
 
     if( !path || !component ) {
 
-        throw new Error( missingPathAndOrComponentMessage );
+        throw subzero.megaFreeze( new Error( missingPathAndOrComponentMessage ) );
     }
 
     if( (typeof path !== STRING) || (typeof component !== STRING) ) {
 
-        throw new Error( nonStringPathAndOrComponentMessage );
+        throw subzero.megaFreeze( new Error( nonStringPathAndOrComponentMessage ) );
     }
 
     if( (path.length > pathAndComponentLengthLimit) ||
         (component.length > pathAndComponentLengthLimit) ) {
 
-        throw new Error( tooLongPathAndOrComponentMessage );
+        throw subzero.megaFreeze( new Error( tooLongPathAndOrComponentMessage ) );
     }
 });
 

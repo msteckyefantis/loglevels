@@ -8,6 +8,8 @@ const sinon = require( 'sinon' );
 
 const freshy = require( 'freshy' )
 
+const isDeepFrozen = require( 'is-deep-frozen' );
+
 const ROOT_PATH = '../';
 
 const MODULE_PATH = 'index.js';
@@ -64,20 +66,16 @@ describe( MODULE_PATH, function() {
 
             consoleLogStub.restore();
 
-            expect( loggerModule ).to.be.frozen;
-            expect( loggerModule.setLocationAndGetLogger ).to.be.frozen;
+            expect( isDeepFrozen( loggerModule ) ).to.eql( {} );
 
-            expect( logger ).to.be.frozen;
-            expect( logger.debug ).to.be.frozen;
-            expect( logger.info ).to.be.frozen;
-            expect( logger.warn ).to.be.frozen;
-            expect( logger.error ).to.be.frozen;
-            expect( logger.critical ).to.be.frozen;
+            expect( isDeepFrozen( logger ) ).to.eql( {} );
 
             expect( consoleLogStub.args.length ).to.equal( 0 );
         });
 
         it( 'init failure: no component provided', function() {
+
+            consoleLogStub.restore();
 
             let erroredAsExpected = false;
 
@@ -89,20 +87,20 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: no path and/or component' ) {
 
+                    expect( isDeepFrozen( error ) ).to.eql( {} );
+
                     erroredAsExpected = true;
                 }
             }
-            finally {
 
-                consoleLogStub.restore();
+            expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( consoleLogStub.args.length ).equal( 0 );
-
-                expect( erroredAsExpected ).true;
-            }
+            expect( erroredAsExpected ).true;
         });
 
         it( 'init failure: no path or component provided', function() {
+
+            consoleLogStub.restore();
 
             let erroredAsExpected = false;
 
@@ -114,20 +112,20 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: no path and/or component' ) {
 
+                    expect( isDeepFrozen( error ) ).to.eql( {} );
+
                     erroredAsExpected = true;
                 }
             }
-            finally {
 
-                consoleLogStub.restore();
+            expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( consoleLogStub.args.length ).equal( 0 );
-
-                expect( erroredAsExpected ).true;
-            }
+            expect( erroredAsExpected ).true;
         });
 
         it( 'init failure: no path provided', function() {
+
+            consoleLogStub.restore();
 
             let erroredAsExpected = false;
 
@@ -139,20 +137,20 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: no path and/or component' ) {
 
+                    expect( isDeepFrozen( error ) ).to.eql( {} );
+
                     erroredAsExpected = true;
                 }
             }
-            finally {
 
-                consoleLogStub.restore();
+            expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( consoleLogStub.args.length ).equal( 0 );
-
-                expect( erroredAsExpected ).true;
-            }
+            expect( erroredAsExpected ).true;
         });
 
         it( 'init failure: path is not a string', function() {
+
+            consoleLogStub.restore();
 
             let erroredAsExpected = false;
 
@@ -164,20 +162,20 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
 
+                    expect( isDeepFrozen( error ) ).to.eql( {} );
+
                     erroredAsExpected = true;
                 }
             }
-            finally {
 
-                consoleLogStub.restore();
+            expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( consoleLogStub.args.length ).equal( 0 );
-
-                expect( erroredAsExpected ).true;
-            }
+            expect( erroredAsExpected ).true;
         });
 
         it( 'init failure: component is not a string', function() {
+
+            consoleLogStub.restore();
 
             let erroredAsExpected = false;
 
@@ -189,20 +187,20 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
 
+                    expect( isDeepFrozen( error ) ).to.eql( {} );
+
                     erroredAsExpected = true;
                 }
             }
-            finally {
 
-                consoleLogStub.restore();
+            expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( consoleLogStub.args.length ).equal( 0 );
-
-                expect( erroredAsExpected ).true;
-            }
+            expect( erroredAsExpected ).true;
         });
 
         it( 'init failure: path and component are not strings', function() {
+
+            consoleLogStub.restore();
 
             let erroredAsExpected = false;
 
@@ -214,20 +212,20 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
 
+                    expect( isDeepFrozen( error ) ).to.eql( {} );
+
                     erroredAsExpected = true;
                 }
             }
-            finally {
 
-                consoleLogStub.restore();
+            expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( consoleLogStub.args.length ).equal( 0 );
-
-                expect( erroredAsExpected ).true;
-            }
+            expect( erroredAsExpected ).true;
         });
 
         it( 'init failure: path is too long', function() {
+
+            consoleLogStub.restore();
 
             let erroredAsExpected = false;
 
@@ -239,20 +237,20 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
 
+                    expect( isDeepFrozen( error ) ).to.eql( {} );
+
                     erroredAsExpected = true;
                 }
             }
-            finally {
 
-                consoleLogStub.restore();
+            expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( consoleLogStub.args.length ).equal( 0 );
-
-                expect( erroredAsExpected ).true;
-            }
+            expect( erroredAsExpected ).true;
         });
 
         it( 'init failure: component is too long', function() {
+
+            consoleLogStub.restore();
 
             let erroredAsExpected = false;
 
@@ -264,20 +262,20 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
 
+                    expect( isDeepFrozen( error ) ).to.eql( {} );
+
                     erroredAsExpected = true;
                 }
             }
-            finally {
 
-                consoleLogStub.restore();
+            expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( consoleLogStub.args.length ).equal( 0 );
-
-                expect( erroredAsExpected ).true;
-            }
+            expect( erroredAsExpected ).true;
         });
 
         it( 'init failure: path and component are too long', function() {
+
+            consoleLogStub.restore();
 
             let erroredAsExpected = false;
 
@@ -289,17 +287,15 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
 
+                    expect( isDeepFrozen( error ) ).to.eql( {} );
+
                     erroredAsExpected = true;
                 }
             }
-            finally {
 
-                consoleLogStub.restore();
+            expect( consoleLogStub.args.length ).equal( 0 );
 
-                expect( consoleLogStub.args.length ).equal( 0 );
-
-                expect( erroredAsExpected ).true;
-            }
+            expect( erroredAsExpected ).true;
         });
     });
 
