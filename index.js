@@ -99,7 +99,7 @@ const getLogger = subzero.megaFreeze( ( path, component ) => {
 
     const logger = {};
 
-    allLogLevels.forEach( function( logLevel ) {
+    allLogLevels.forEach( logLevel => {
 
         logger[ logLevel ] = message => {
 
