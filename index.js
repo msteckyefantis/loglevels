@@ -81,7 +81,7 @@ const log = subzero.megaFreeze( ( level, path, message ) => {
 
 const logIfOnAndLevelIsEnabled = subzero.megaFreeze( ( level, path, message, component ) => {
 
-    const logLevelsIsOnForComponent = (componentsLogLevelsIsOnFor.indexOf( component ) >= 0)
+    const logLevelsIsOnForComponent = (componentsLogLevelsIsOnFor.indexOf( component ) >= 0);
 
     if( logLevelsIsOnForComponent ) {
 
