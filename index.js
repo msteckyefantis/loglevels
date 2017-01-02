@@ -2,7 +2,7 @@
 
 const subzero = require( 'subzero' );
 
-const levelToColourCode = subzero.megaFreeze({
+const levelToColourCode = Object.freeze({
 
     debug: 34,
     info: 92,
@@ -26,24 +26,24 @@ const nonStringPathAndOrComponentMessage = 'LogLevels Error: path and/or compone
 const tooLongPathAndOrComponentMessage = 'LogLevels Error: path and/or component are too long ' +
     `(max length for either is ${ pathAndComponentLengthLimit } characters)`;
 
-const allLogLevels = subzero.megaFreeze( Object.keys( levelToColourCode ) );
+const allLogLevels = Object.freeze( Object.keys( levelToColourCode ) );
 
 // getting the optional LOG_LEVELS_ON_FOR_COMPONENTS environment variable if it's defined:
 let envLogLevelsOnForComponents = process.env.LOG_LEVELS_ON_FOR_COMPONENTS;
 
 if( envLogLevelsOnForComponents ) {
 
-    envLogLevelsOnForComponents = subzero.megaFreeze( envLogLevelsOnForComponents.split( ' ' ) );
+    envLogLevelsOnForComponents = Object.freeze( envLogLevelsOnForComponents.split( ' ' ) );
 }
 
-const componentsLogLevelsIsOnFor = envLogLevelsOnForComponents || subzero.megaFreeze( [] );
+const componentsLogLevelsIsOnFor = envLogLevelsOnForComponents || Object.freeze( [] );
 
 // getting the optional LOG_LEVELS environment variable if it's defined:
 let envLogLevels = process.env.LOG_LEVELS;
 
 if( envLogLevels ) {
 
-    envLogLevels = subzero.megaFreeze( envLogLevels.split( ' ' ) );
+    envLogLevels = Object.freeze( envLogLevels.split( ' ' ) );
 }
 
 const logLevels = envLogLevels || allLogLevels;
@@ -62,94 +62,109 @@ const relativePathIdentifier = envRootLoggerPath;
 const colourIsOff = !!process.env.LOGGER_COLOUR_OFF;
 
 
-const log = subzero.megaFreeze( ( level, path, message ) => {
+const log = Object.freeze(
 
-    if( colourIsOff ) {
+    ( level, path, message ) => {
 
-        return console.log( `${ level }: ${ path }: ${ message }` );
+        if( colourIsOff ) {
+
+            return console.log( `${ level }: ${ path }: ${ message }` );
+        }
+
+        const colourCode = levelToColourCode[ level ];
+
+        const levelColour = `\x1b[${ colourCode }m`;
+
+        const loggerMessage = `${ level }: ${ pathColour }${ path }:${ levelColour } ${ message }`;
+
+        console.log( `${ levelColour }${ loggerMessage }${ defaultColour }` );
     }
-
-    const colourCode = levelToColourCode[ level ];
-
-    const levelColour = `\x1b[${ colourCode }m`;
-
-    const loggerMessage = `${ level }: ${ pathColour }${ path }:${ levelColour } ${ message }`;
-
-    console.log( `${ levelColour }${ loggerMessage }${ defaultColour }` );
-});
+);
 
 
-const logIfOnAndLevelIsEnabled = subzero.megaFreeze( ( level, path, message, component ) => {
+const logIfOnAndLevelIsEnabled = Object.freeze(
 
-    const logLevelsIsOnForComponent = (componentsLogLevelsIsOnFor.indexOf( component ) >= 0);
+    ( level, path, message, component ) => {
 
-    if( logLevelsIsOnForComponent ) {
+        const logLevelsIsOnForComponent = (componentsLogLevelsIsOnFor.indexOf( component ) >= 0);
 
-        const levelIsEnabled = (logLevels.indexOf( level ) >= 0);
+        if( logLevelsIsOnForComponent ) {
 
-        if( levelIsEnabled ) {
+            const levelIsEnabled = (logLevels.indexOf( level ) >= 0);
 
-            log( level, path, message );
+            if( levelIsEnabled ) {
+
+                log( level, path, message );
+            }
         }
     }
-});
+);
 
 
-const getLogger = subzero.megaFreeze( ( path, component ) => {
+const getLogger = Object.freeze(
 
-    const logger = {};
+    ( path, component ) => {
 
-    allLogLevels.forEach( logLevel => {
+        const logger = {};
 
-        logger[ logLevel ] = message => {
+        allLogLevels.forEach( logLevel => {
 
-            logIfOnAndLevelIsEnabled( logLevel, path, message, component );
+            logger[ logLevel ] = message => {
+
+                logIfOnAndLevelIsEnabled( logLevel, path, message, component );
+            }
+        });
+
+        return subzero.megaFreeze( logger );
+    }
+);
+
+
+const getRealitivePath = Object.freeze(
+
+    path => {
+
+        const lastIndexOfIdentifierInPath = path.lastIndexOf( relativePathIdentifier );
+
+        const identifierIsInPath = (lastIndexOfIdentifierInPath >= 0);
+
+        if( identifierIsInPath ) {
+
+            const relativePath = path.substring(
+
+                lastIndexOfIdentifierInPath +
+                relativePathIdentifier.length
+            );
+
+            return relativePath;
         }
-    });
 
-    return subzero.megaFreeze( logger );
-});
-
-
-const getRealitivePath = subzero.megaFreeze( path => {
-
-    const lastIndexOfIdentifierInPath = path.lastIndexOf( relativePathIdentifier );
-
-    const identifierIsInPath = (lastIndexOfIdentifierInPath >= 0);
-
-    if( identifierIsInPath ) {
-
-        const relativePath = path.substring(
-
-            lastIndexOfIdentifierInPath +
-            relativePathIdentifier.length
-        );
-
-        return relativePath;
+        return path;
     }
-
-    return path;
-});
+);
 
 
-const validatePathAndComponent = subzero.megaFreeze( ( path, component ) => {
+const validatePathAndComponent = Object.freeze(
 
-    if( !path || !component ) {
+    ( path, component ) => {
 
-        throw subzero.megaFreeze( new Error( missingPathAndOrComponentMessage ) );
+        if( !path || !component ) {
+
+            throw subzero.megaFreeze( new Error( missingPathAndOrComponentMessage ) );
+        }
+
+        if( (typeof path !== STRING) || (typeof component !== STRING) ) {
+
+            throw subzero.megaFreeze( new Error( nonStringPathAndOrComponentMessage ) );
+        }
+
+        if( (path.length > pathAndComponentLengthLimit) ||
+            (component.length > pathAndComponentLengthLimit) ) {
+
+            throw subzero.megaFreeze( new Error( tooLongPathAndOrComponentMessage ) );
+        }
     }
-
-    if( (typeof path !== STRING) || (typeof component !== STRING) ) {
-
-        throw subzero.megaFreeze( new Error( nonStringPathAndOrComponentMessage ) );
-    }
-
-    if( (path.length > pathAndComponentLengthLimit) ||
-        (component.length > pathAndComponentLengthLimit) ) {
-
-        throw subzero.megaFreeze( new Error( tooLongPathAndOrComponentMessage ) );
-    }
-});
+);
 
 
 module.exports = subzero.megaFreeze({
