@@ -1,6 +1,6 @@
 {
   "name": "loglevels",
-  "version": "7.0.9",
+  "version": "8.0.0",
   "description": "single file no dependency colour logger",
   "main": "index.js",
   "scripts": {
@@ -13,9 +13,8 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "freshy": "^1.0.2",
-    "is-deep-frozen": "^5.0.0",
     "istanbul": "^0.4.5",
-    "mocha": "^3.2.0",
+    "mocha": "^6.1.4",
     "sinon": "^1.17.6"
   },
   "keywords": [
@@ -32,8 +31,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/msteckyefantis/loglevels"
-  },
-  "dependencies": {
-    "subzero": "^6.0.0"
   }
 }

@@ -1,7 +1,7 @@
 #LogLevels [![npm version](https://badge.fury.io/js/loglevels.svg)](https://badge.fury.io/js/loglevels) [![Build Status](https://travis-ci.org/msteckyefantis/loglevels.svg?branch=master)](https://travis-ci.org/msteckyefantis/loglevels)
 
 ##About:
-Sensual, single file, single dependency, colour logger. Just for you baby🐬.
+Sensual, single file, no dependency, colour logger. Just for you baby🐬.
 
 ##install:
 
@@ -18,7 +18,7 @@ npm install loglevels
 process.env.LOG_LEVELS_ON_FOR_COMPONENTS = 'component_a component_b component_c';
 
 /* regular environment variables: */
-// process.env.ROOT_LOGGER_PATH = 'test_dir';
+// process.env.ROOT_LOGGER_PATH = 'music_app';
 // process.env.LOG_LEVELS = 'debug warn critical';
 // process.env.LOGGER_COLOUR_OFF = 'true';
 

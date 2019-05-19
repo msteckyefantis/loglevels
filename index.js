@@ -1,7 +1,5 @@
 'use strict';
 
-const subzero = require( 'subzero' );
-
 const levelToColourCode = Object.freeze({
 
     debug: 34,
@@ -64,18 +62,22 @@ const colourIsOff = !!process.env.LOGGER_COLOUR_OFF;
 
 const log = Object.freeze(
 
-    ( level, path, message ) => {
+    ( level, path, ...message ) => {
+    
+        const messageToLog = [ ...message ].join( ' ' )
 
         if( colourIsOff ) {
 
-            return console.log( `${ level }: ${ path }: ${ message }` );
+            return console.log(
+                `${ level }: ${ path }: ${ messageToLog }`
+            );
         }
 
         const colourCode = levelToColourCode[ level ];
 
         const levelColour = `\x1b[${ colourCode }m`;
 
-        const loggerMessage = `${ level }: ${ pathColour }${ path }:${ levelColour } ${ message }`;
+        const loggerMessage = `${ level }: ${ pathColour }${ path }:${ levelColour } ${ messageToLog }`;
 
         console.log( `${ levelColour }${ loggerMessage }${ defaultColour }` );
     }
@@ -84,17 +86,17 @@ const log = Object.freeze(
 
 const logIfOnAndLevelIsEnabled = Object.freeze(
 
-    ( level, path, message, component ) => {
+    ( level, path, component, ...message  ) => {
 
-        const logLevelsIsOnForComponent = (componentsLogLevelsIsOnFor.indexOf( component ) >= 0);
+        const logLevelsIsOnForComponent = componentsLogLevelsIsOnFor.includes( component );
 
         if( logLevelsIsOnForComponent ) {
 
-            const levelIsEnabled = (logLevels.indexOf( level ) >= 0);
+            const levelIsEnabled = logLevels.includes( level );
 
             if( levelIsEnabled ) {
 
-                log( level, path, message );
+                log( level, path, ...message );
             }
         }
     }
@@ -109,13 +111,13 @@ const getLogger = Object.freeze(
 
         allLogLevels.forEach( logLevel => {
 
-            logger[ logLevel ] = message => {
+            logger[ logLevel ] = ( ...message ) => {
 
-                logIfOnAndLevelIsEnabled( logLevel, path, message, component );
+                logIfOnAndLevelIsEnabled( logLevel, path, component, ...message );
             }
         });
 
-        return subzero.megaFreeze( logger );
+        return Object.freeze( logger );
     }
 );
 
@@ -150,24 +152,24 @@ const validatePathAndComponent = Object.freeze(
 
         if( !path || !component ) {
 
-            throw subzero.megaFreeze( new Error( missingPathAndOrComponentMessage ) );
+            throw Object.freeze( new Error( missingPathAndOrComponentMessage ) );
         }
 
         if( (typeof path !== STRING) || (typeof component !== STRING) ) {
 
-            throw subzero.megaFreeze( new Error( nonStringPathAndOrComponentMessage ) );
+            throw Object.freeze( new Error( nonStringPathAndOrComponentMessage ) );
         }
 
         if( (path.length > pathAndComponentLengthLimit) ||
             (component.length > pathAndComponentLengthLimit) ) {
 
-            throw subzero.megaFreeze( new Error( tooLongPathAndOrComponentMessage ) );
+            throw Object.freeze( new Error( tooLongPathAndOrComponentMessage ) );
         }
     }
 );
 
 
-module.exports = subzero.megaFreeze({
+module.exports = Object.freeze({
 
     setLocationAndGetLogger( path, component ) {
 

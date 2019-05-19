@@ -8,8 +8,6 @@ const sinon = require( 'sinon' );
 
 const freshy = require( 'freshy' )
 
-const isDeepFrozen = require( 'is-deep-frozen' );
-
 const ROOT_PATH = '../';
 
 const MODULE_PATH = 'index.js';
@@ -58,21 +56,6 @@ describe( MODULE_PATH, function() {
 
     describe( 'init', function() {
 
-        it( 'init: checking frozeness', function() {
-
-            const loggerModule = require( FULL_MODULE_PATH )
-
-            logger = loggerModule.setLocationAndGetLogger( controlFileName, controlComponentA );
-
-            consoleLogStub.restore();
-
-            expect( isDeepFrozen( loggerModule ) ).to.eql( {} );
-
-            expect( isDeepFrozen( logger ) ).to.eql( {} );
-
-            expect( consoleLogStub.args.length ).to.equal( 0 );
-        });
-
         it( 'init failure: no component provided', function() {
 
             consoleLogStub.restore();
@@ -86,8 +69,6 @@ describe( MODULE_PATH, function() {
             catch( error ) {
 
                 if( error.message === 'LogLevels Error: no path and/or component' ) {
-
-                    expect( isDeepFrozen( error ) ).to.eql( {} );
 
                     erroredAsExpected = true;
                 }
@@ -112,8 +93,6 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: no path and/or component' ) {
 
-                    expect( isDeepFrozen( error ) ).to.eql( {} );
-
                     erroredAsExpected = true;
                 }
             }
@@ -136,8 +115,6 @@ describe( MODULE_PATH, function() {
             catch( error ) {
 
                 if( error.message === 'LogLevels Error: no path and/or component' ) {
-
-                    expect( isDeepFrozen( error ) ).to.eql( {} );
 
                     erroredAsExpected = true;
                 }
@@ -162,8 +139,6 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
 
-                    expect( isDeepFrozen( error ) ).to.eql( {} );
-
                     erroredAsExpected = true;
                 }
             }
@@ -186,8 +161,6 @@ describe( MODULE_PATH, function() {
             catch( error ) {
 
                 if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
-
-                    expect( isDeepFrozen( error ) ).to.eql( {} );
 
                     erroredAsExpected = true;
                 }
@@ -212,8 +185,6 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are not strings' ) {
 
-                    expect( isDeepFrozen( error ) ).to.eql( {} );
-
                     erroredAsExpected = true;
                 }
             }
@@ -236,8 +207,6 @@ describe( MODULE_PATH, function() {
             catch( error ) {
 
                 if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
-
-                    expect( isDeepFrozen( error ) ).to.eql( {} );
 
                     erroredAsExpected = true;
                 }
@@ -262,8 +231,6 @@ describe( MODULE_PATH, function() {
 
                 if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
 
-                    expect( isDeepFrozen( error ) ).to.eql( {} );
-
                     erroredAsExpected = true;
                 }
             }
@@ -286,8 +253,6 @@ describe( MODULE_PATH, function() {
             catch( error ) {
 
                 if( error.message === 'LogLevels Error: path and/or component are too long (max length for either is 2083 characters)' ) {
-
-                    expect( isDeepFrozen( error ) ).to.eql( {} );
 
                     erroredAsExpected = true;
                 }
