@@ -1,15 +1,15 @@
-#LogLevels [![npm version](https://badge.fury.io/js/loglevels.svg)](https://badge.fury.io/js/loglevels) [![Build Status](https://travis-ci.org/msteckyefantis/loglevels.svg?branch=master)](https://travis-ci.org/msteckyefantis/loglevels)
+# LogLevels [![npm version](https://badge.fury.io/js/loglevels.svg)](https://badge.fury.io/js/loglevels) [![Build Status](https://travis-ci.org/msteckyefantis/loglevels.svg?branch=master)](https://travis-ci.org/msteckyefantis/loglevels)
 
-##About:
+## About:
 Sensual, single file, no dependency, colour logger. Just for you baby🐬.
 
-##install:
+## install:
 
 ```
 npm install loglevels
 ```
 
-##usage:
+## usage:
 
 ```.js
 'use strict';
@@ -33,10 +33,9 @@ logger.error( 'your message here' );
 logger.critical( 'sexy monkey' );
 ```
 
-####This code sample logs the following:
-(`__filename` in this example is `'/user/dir_a/test_dir/dir_b/test_dir/dir_c/index.js'`)
-[![full2_1.png](https://s13.postimg.org/odhg3yb07/full2_1.png)](https://postimg.org/image/ynjv370vn/)
+#### This code sample logs the following:
+(`__filename` in this example is `'/Users/michaelstecky-efantis/music_app/loglevels/music_app/loglevelsTest.js'`)
+![alt text](https://s3.amazonaws.com/mega-monkey/withoutenv.png)
 
-
-####with all the regular environment variables uncommented, the code sample above logs the following:
-[![partial2_1.png](https://s18.postimg.org/b6t2tc3o9/partial2_1.png)](https://postimg.org/image/7n753j0yd/)
+#### With all the regular environment variables uncommented, the code sample above logs the following:
+![alt text](https://s3.amazonaws.com/mega-monkey/withenv.png)
